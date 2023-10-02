@@ -1,3 +1,6 @@
 package com.example.kinoxp.Backend.enums;
-public class TheaterEnum {
+public enum TheaterEnum {
+
+    THEATER1,
+    THEATER2
 }
