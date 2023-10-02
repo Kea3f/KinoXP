@@ -2,11 +2,8 @@ package com.example.kinoxp.Backend.repositories;
 
 import com.example.kinoxp.Backend.model.EmployeeModel;
 import org.springframework.stereotype.Repository;
-
 import javax.sql.DataSource;
-import javax.xml.crypto.Data;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 @Repository
