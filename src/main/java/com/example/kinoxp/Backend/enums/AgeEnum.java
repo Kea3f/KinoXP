@@ -1,7 +1,5 @@
 package com.example.kinoxp.Backend.enums;
 
-import com.example.kinoxp.Backend.model.AgeRestrictions;
-
 public enum AgeEnum {
 
     G("General audiences"),
