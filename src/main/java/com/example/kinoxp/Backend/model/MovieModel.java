@@ -8,7 +8,6 @@ import jakarta.persistence.Id;
 @Entity
 public class MovieModel {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
