@@ -1,4 +1,14 @@
 package com.example.kinoxp.Backend.enums;
 
-public class GenreEnum {
+public enum GenreEnum {
+    ACTION,
+    ADVENTURE,
+    CARTOON,
+    COMEDY,
+    DOCUMENTARY,
+    HORROR,
+    ROMANTIC,
+    SCI_FI,
+
+
 }
