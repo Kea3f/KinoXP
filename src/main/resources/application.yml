@@ -1,2 +1,9 @@
 server:
   port: 2020
+
+  spring:
+    datasource:
+      url: jdbc:sqlserver://$AZ_DATABASE_NAME.database.windows.net:1433;database=demo;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
+      user: root
+      password: $AZ_SQL_SERVER_PASSWORD
+      driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
