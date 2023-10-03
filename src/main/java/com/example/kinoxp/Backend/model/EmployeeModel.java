@@ -5,9 +5,12 @@ import jakarta.persistence.*;
 @Entity
 public class EmployeeModel {
 
+
     @Id
-    @Column(length = 5)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int employee_number;
+
+    @Column(length = 4)
     private String password;
     private String employee_name;
     private int employee_phoneNo;

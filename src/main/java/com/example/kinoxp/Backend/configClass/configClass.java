@@ -1,11 +1,10 @@
-package com.example.kinoxp;
+package com.example.kinoxp.Backend.configClass;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
-import java.sql.DriverManager;
 
 @Configuration
 public class configClass {
