@@ -7,7 +7,9 @@ public class EmployeeModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column (unique = true)
     private int employee_number;
+
 
     @Column(length = 4)
     private String password;
