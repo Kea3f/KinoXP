@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Information Lookup</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .search-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .search-input {
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            width: 400px;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .suggestions {
+            display: none;
+            width: 400px;
+            border: 2px solid #ccc;
+            border-top: none;
+            max-height: 200px;
+            overflow-y: auto;
+            background-color: #fff;
+            border-radius: 0 0 5px 5px;
+        }
+
+        .suggestion {
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .suggestion:hover {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+<h1>Booking Information Lookup</h1>
+<div class="search-container">
+    <input type="text" id="phone-input" class="search-input" placeholder="Enter phone number">
+    <div class="suggestions" id="suggestions-container"></div>
+</div>
+
+
+
+<script> /* skal ligges in i sit eget js fil og henvises til */
+    const phoneInput = document.getElementById('phone-input');
+    const suggestionsContainer = document.getElementById('suggestions-container');
+
+    // Sample suggestion data (replace with your own data)
+    const suggestions = [
+        'Booking 123456',
+        'Booking 789012',
+        'Booking 345678',
+        'Booking 901234',
+    ];
+
+    phoneInput.addEventListener('input', () => {
+        const inputValue = phoneInput.value.trim();
+        suggestionsContainer.innerHTML = '';
+
+        if (inputValue.length === 0) {
+            suggestionsContainer.style.display = 'none';
+            return;
+        }
+
+        const filteredSuggestions = suggestions.filter(suggestion =>
+            suggestion.toLowerCase().includes(inputValue.toLowerCase())
+        );
+
+        if (filteredSuggestions.length === 0) {
+            suggestionsContainer.style.display = 'none';
+            return;
+        }
+
+        filteredSuggestions.forEach(suggestion => {
+            const suggestionElement = document.createElement('div');
+            suggestionElement.className = 'suggestion';
+            suggestionElement.textContent = suggestion;
+
+            suggestionElement.addEventListener('click', () => {
+                phoneInput.value = suggestion;
+                suggestionsContainer.style.display = 'none';
+            });
+
+            suggestionsContainer.appendChild(suggestionElement);
+        });
+
+        suggestionsContainer.style.display = 'block';
+    });
+
+    // Close suggestions when clicking outside the input field
+    document.addEventListener('click', event => {
+        if (!phoneInput.contains(event.target) && !suggestionsContainer.contains(event.target)) {
+            suggestionsContainer.style.display = 'none';
+        }
+    });
+</script>
+</body>
+</html>
