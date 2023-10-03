@@ -7,10 +7,9 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-
+@Repository
 public interface EmployeeRepository extends JpaRepository<EmployeeModel, String> {
-
-
+EmployeeModel findByEmployeeNumber(int employeeNumber);
 
 
 
