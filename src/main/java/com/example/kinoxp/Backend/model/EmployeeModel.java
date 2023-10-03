@@ -2,6 +2,7 @@ package com.example.kinoxp.Backend.model;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class EmployeeModel {
@@ -11,8 +12,6 @@ public class EmployeeModel {
     @Column (unique = true)
     private int employee_number;
 
-
-    @Column(length = 4)
     private String password;
     private String employee_name;
     private int employee_phoneNo;
@@ -58,6 +57,9 @@ public class EmployeeModel {
         this.employee_mail = employee_mail;
     }
 
+    //many employees can be associated with many movies
+    @ManyToMany(mappedBy = "employees")
+    private List<MovieModel> movies;
 
 }
 

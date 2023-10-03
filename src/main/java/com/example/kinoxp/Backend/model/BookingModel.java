@@ -1,40 +1,35 @@
 package com.example.kinoxp.Backend.model;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class BookingModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-/*
-    @ManyToOne
-    private Employee employee; // The employee who made the booking
+    @Column (unique = true)
+    private String booking_number; // An auto-generated booking reference
 
-
-    @ManyToOne
-    private Movie movie; // The movie being booked
-
-
- */
     private String customer_name;
     private String customer_phone;
     private String customer_email;
     private double total_price;
-    private String booking_number; // An auto-generated booking reference
 
-    // @ManyToOne
-    //private MovieTheater movieTheater; // The specific movie theater where the booking is made
+    @ManyToOne
+    @JoinColumn(name = "employee_id") // This should match the column name in your database table
+    private EmployeeModel employee;
 
-    // @OneToMany(mappedBy = "booking")
-    //private List<Seat> seats; // Flere sæder er muligt af booke - skal der være et maks? nok ik
 
-    // tilføje getters, and setters
+    @ManyToOne
+    @JoinColumn(name = "movie_id") // This should match the column name in your database table
+    private MovieModel movie;
+
+    @OneToMany(mappedBy = "booking")
+    private List<SeatModel> seats;
+
+
 
 
 }

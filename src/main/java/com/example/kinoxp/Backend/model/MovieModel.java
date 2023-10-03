@@ -4,10 +4,8 @@ import com.example.kinoxp.Backend.enums.AgeEnum;
 import com.example.kinoxp.Backend.enums.GenreEnum;
 import com.example.kinoxp.Backend.enums.TheaterEnum;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -90,10 +88,14 @@ public class MovieModel {
     private int screening_period_in_days;
     private TheaterEnum theater;
 
-    //private int cleaningTimeMinutes; er det nødvendigt???
+    @ManyToMany
+    @JoinTable(
+            name = "employee_movie",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "employee_id")
+    )
+    private List<EmployeeModel> employees;
 
-    //@ManyToOne
-    //private MovieTheater movieTheater; // The specific movie theater where the movie is shown - create enum
 
 
 
