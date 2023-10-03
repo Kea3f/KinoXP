@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 @Entity
 public class EmployeeModel {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int employee_number;
