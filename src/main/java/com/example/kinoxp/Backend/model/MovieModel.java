@@ -4,7 +4,10 @@ import com.example.kinoxp.Backend.enums.AgeEnum;
 import com.example.kinoxp.Backend.enums.GenreEnum;
 import com.example.kinoxp.Backend.enums.TheaterEnum;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 
 @Entity

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Website</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .menu-bar {
+      background-color: #333;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 95%; /* Set the width to 50% */
+      margin: 0 auto; /* Center the menu bar horizontally */
+      padding: 15px 0; /* Adjust the padding top and bottom */
+      border-radius: 10px; /* Add rounded corners */
+    }
+
+    .menu-logo {
+      flex-grow: 1; /* Allows the logo to expand and take up available space */
+      text-align: center; /* Center-align the text within the logo */
+    }
+
+    .menu-bar a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+    /* Style for date and time */
+    .date-time-container {
+      text-align: center;
+    }
+
+    .date-time-container span {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+<div class="menu-bar">
+  <div>
+    <span id="welcome-message">Welcome John Doe</span>
+  </div>
+  <div class="menu-logo">
+    <a href="home.html">KinoXP</a>
+  </div>
+  <div class="date-time-container">
+    <span id="date-time"></span>
+  </div>
+</div>
+
+<script>
+  // Function to update the date and time
+  function updateDateTime() {
+    const dateTimeElement = document.getElementById("date-time");
+
+    // Get the current date and time
+    const now = new Date();
+
+    // Format the date and time as desired
+    const dateTimeString = now.toLocaleString();
+
+    // Update the element
+    dateTimeElement.textContent = dateTimeString;
+  }
+
+  // Call the updateDateTime function to display the date and time
+  updateDateTime();
+
+  // Set an interval to update the date and time every second
+  setInterval(updateDateTime, 1000);
+</script>
+</body>
+</html>

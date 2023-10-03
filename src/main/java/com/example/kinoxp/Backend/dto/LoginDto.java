@@ -1,13 +1,15 @@
 package com.example.kinoxp.Backend.dto;
 
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 public class LoginDto {
 
     @Id
-    @Column (length = 2)
+    @Column(length = 2)
     private int employee_number;
     private String password;
 
