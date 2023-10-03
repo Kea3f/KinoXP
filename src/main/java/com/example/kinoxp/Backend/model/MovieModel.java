@@ -3,10 +3,9 @@ package com.example.kinoxp.Backend.model;
 import com.example.kinoxp.Backend.enums.AgeEnum;
 import com.example.kinoxp.Backend.enums.GenreEnum;
 import com.example.kinoxp.Backend.enums.TheaterEnum;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+
+import javax.persistence.*;
+
 
 @Entity
 public class MovieModel {

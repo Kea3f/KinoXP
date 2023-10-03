@@ -1,6 +1,7 @@
 package com.example.kinoxp.Backend.model;
 
-import jakarta.persistence.*;
+
+import javax.persistence.*;
 
 @Entity
 public class BookingModel {

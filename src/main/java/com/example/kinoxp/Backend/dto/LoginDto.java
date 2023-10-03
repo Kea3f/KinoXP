@@ -1,8 +1,7 @@
 package com.example.kinoxp.Backend.dto;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+
+import javax.persistence.*;
 
 @Entity
 public class LoginDto {
