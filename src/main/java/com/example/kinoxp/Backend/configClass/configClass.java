@@ -13,9 +13,9 @@ public class configClass {
     public DataSource dataSource(){
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-       // dataSource.setUrl(INDSÆT URL);
-        // dataSource.setUsername("root")
-        //dataSource.setPassword("1234);
+        dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/kinohoes");
+        dataSource.setUsername("SabrinaMathilde");
+        dataSource.setPassword("Kea1234.");
         return dataSource;
     }
 }
