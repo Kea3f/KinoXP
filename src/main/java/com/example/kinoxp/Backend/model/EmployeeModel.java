@@ -1,6 +1,7 @@
 package com.example.kinoxp.Backend.model;
 
-import jakarta.persistence.*;
+
+import javax.persistence.*;
 
 @Entity
 public class EmployeeModel {
@@ -56,12 +57,6 @@ public class EmployeeModel {
     public void setEmployee_mail(String employee_mail) {
         this.employee_mail = employee_mail;
     }
-
-
-
-
-
-
 
 
 }
