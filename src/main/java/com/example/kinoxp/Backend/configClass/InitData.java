@@ -1,17 +1,25 @@
 package com.example.kinoxp.Backend.configClass;
 
+import com.example.kinoxp.Backend.enums.AgeEnum;
+import com.example.kinoxp.Backend.enums.GenreEnum;
+import com.example.kinoxp.Backend.enums.TheaterEnum;
 import com.example.kinoxp.Backend.model.EmployeeModel;
+import com.example.kinoxp.Backend.model.MovieModel;
 import com.example.kinoxp.Backend.repositories.EmployeeRepository;
+import com.example.kinoxp.Backend.repositories.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-//Test data
+import java.util.Set;
+
+//Test data --> kan godt være der skal laves flere forskellige initData klasser for hver test data enitty
 @Component
 public class InitData implements CommandLineRunner {
 
     @Autowired
     EmployeeRepository employeeRepository;
+    MovieRepository movieRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -58,6 +66,29 @@ public class InitData implements CommandLineRunner {
 
         // Save the employee to the database using the repository
         employeeRepository.save(employee4);
+
+
+
+
+        //Test data movies
+        MovieModel movie1 = new MovieModel();
+        movie1.setId(1);
+        movie1.setMovie_title("independence day");
+        movie1.setGenres(Set.of(GenreEnum.SCI_FI, GenreEnum.ADVENTURE, GenreEnum.ACTION));
+        movie1.setRun_time(120); //Run times in minutes
+        movie1.setAge_limit(AgeEnum.PG13);
+        movie1.setTheater(TheaterEnum.THEATER2);
+        movie1.setResume("resume of movie");
+        movie1.setScreening_period_in_days(14);
+
+        //movieRepository.save(movie1); // Save the movie using the repository
+
+
+        //Save virker ik??
+
+
+
+
 
     }
 

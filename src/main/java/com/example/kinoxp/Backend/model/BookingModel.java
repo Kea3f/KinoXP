@@ -87,11 +87,12 @@ public class BookingModel {
 
 
     @ManyToOne
-    @JoinColumn(name = "movie_id") // This should match the column name in your database table
+    @JoinColumn(name = "movie_id") // This should match the column name in your database table.
     private MovieModel movie;
 
     @OneToMany(mappedBy = "booking")
     private List<SeatModel> seats;
+    //wejdk
 
 
 

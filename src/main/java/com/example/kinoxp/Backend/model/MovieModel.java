@@ -6,6 +6,7 @@ import com.example.kinoxp.Backend.enums.TheaterEnum;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -17,7 +18,20 @@ public class MovieModel {
 
     private String movie_title;
     private int run_time;
-    private GenreEnum genre;
+
+    public Set<GenreEnum> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(Set<GenreEnum> genres) {
+        this.genres = genres;
+    }
+
+    @ElementCollection(targetClass = GenreEnum.class)
+    @CollectionTable(name = "movie_genres", joinColumns = @JoinColumn(name = "movie_id"))
+    @Enumerated(EnumType.STRING)
+    private Set<GenreEnum> genres;
+
     private AgeEnum age_limit;
     private String resume;
 
@@ -45,13 +59,6 @@ public class MovieModel {
         this.run_time = run_time;
     }
 
-    public GenreEnum getGenre() {
-        return genre;
-    }
-
-    public void setGenre(GenreEnum genre) {
-        this.genre = genre;
-    }
 
     public AgeEnum getAge_limit() {
         return age_limit;
@@ -100,4 +107,3 @@ public class MovieModel {
 
 
 }
-

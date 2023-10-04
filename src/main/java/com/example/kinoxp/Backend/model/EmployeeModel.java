@@ -62,11 +62,3 @@ public class EmployeeModel {
     private List<MovieModel> movies;
 
 }
-
-
-
-
-
-
-
-
