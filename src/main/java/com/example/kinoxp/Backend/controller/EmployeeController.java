@@ -18,7 +18,7 @@ public class EmployeeController {
 
     @GetMapping("/login")
     public String loginForm() {
-        return "login.html";
+        return "login";
     }
 
     @PostMapping("/login")
@@ -27,9 +27,9 @@ public class EmployeeController {
 
         if (employee != null && employee.getPassword().equals(password)) {
             session.setAttribute("employee", employee);
-            return "redirect:/homepage.html";
+            return "redirect:/homepage";
         } else {
-            return "login.html"; // husk af lave fejl besked i html siden
+            return "login"; // husk af lave fejl besked i html siden
         }
     }
 
@@ -37,9 +37,9 @@ public class EmployeeController {
     public String dashboard(HttpSession session) {
         EmployeeModel employee = (EmployeeModel) session.getAttribute("employee");
         if (employee != null) {
-            return "homepage.html";
+            return "homepage";
         } else {
-            return "redirect:/login.html";
+            return "redirect:/login";
         }
     }
 
