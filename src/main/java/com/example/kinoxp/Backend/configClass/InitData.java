@@ -59,8 +59,6 @@ public class InitData implements CommandLineRunner {
         // Save the employee to the database using the repository
         employeeRepository.save(employee4);
 
-
-
     }
 
 }
