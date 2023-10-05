@@ -1,6 +1,6 @@
 package com.example.kinoxp.Backend.controller;
 
-import com.example.kinoxp.Backend.model.EmployeeModel;
+import com.example.kinoxp.Backend.model.Employee;
 import com.example.kinoxp.Backend.repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,7 +24,7 @@ public class EmployeeController {
 
     @PostMapping("/login")
     public String loginSubmit(@PathVariable int id, @RequestParam String password, HttpSession session) {
-        EmployeeModel employee = employeeRepository.findAllById(id);
+        Employee employee = employeeRepository.findAllById(id);
 
         if (employee != null && employee.getPassword().equals(password)) {
             session.setAttribute("employee", employee);
@@ -36,7 +36,7 @@ public class EmployeeController {
 
     @GetMapping("/homepage")
     public String dashboard(HttpSession session) {
-        EmployeeModel employee = (EmployeeModel) session.getAttribute("employee");
+        Employee employee = (Employee) session.getAttribute("employee");
         if (employee != null) {
             return "homepage";
         } else {

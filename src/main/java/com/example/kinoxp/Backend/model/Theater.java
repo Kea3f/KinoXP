@@ -3,7 +3,7 @@ package com.example.kinoxp.Backend.model;
 import javax.persistence.*;
 
 @Entity
-public class TheaterModel {
+public class Theater {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
