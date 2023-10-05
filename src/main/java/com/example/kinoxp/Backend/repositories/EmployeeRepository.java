@@ -8,23 +8,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 @Repository
-public interface EmployeeRepository extends JpaRepository<EmployeeModel, String> {
-EmployeeModel findByEmployeeNumber(int employeeNumber);
-
-
+public interface EmployeeRepository extends JpaRepository<EmployeeModel, Long> {
+EmployeeModel findAllById(int id);
 
 }
 
-/*
-private final DataSource dataSource;
 
-    public EmployeeRepository(DataSource dataSource){
-        this.dataSource = dataSource;
-    }
-
-
-    public EmployeeModel login(String employee_number, String password) throws SQLException {
-        Connection con = dataSource.getConnection();
-
-    }
- */

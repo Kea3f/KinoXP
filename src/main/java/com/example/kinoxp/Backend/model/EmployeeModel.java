@@ -1,28 +1,24 @@
 package com.example.kinoxp.Backend.model;
 
-
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class EmployeeModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (unique = true)
-    private int employee_number;
-
+    private int id;
     private String password;
     private String employee_name;
     private int employee_phoneNo;
     private String employee_mail;
 
-    public int getEmployee_number() {
-        return employee_number;
+    public int getId() {
+        return id;
     }
 
-    public void setEmployee_number(int employee_number) {
-        this.employee_number = employee_number;
+    public void setId(int employee_number) {
+        this.id = employee_number;
     }
 
     public String getPassword() {
@@ -57,8 +53,9 @@ public class EmployeeModel {
         this.employee_mail = employee_mail;
     }
 
+    /*
     //many employees can be associated with many movies
     @ManyToMany(mappedBy = "employees")
     private List<MovieModel> movies;
-
+*/
 }
