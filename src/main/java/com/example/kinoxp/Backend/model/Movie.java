@@ -24,4 +24,63 @@ public class Movie {
 
     @OneToMany(mappedBy = "movie")
     private List<Showing> showing;
+
+
+    public int getMovieid() {
+        return movieid;
+    }
+
+    public void setMovieid(int movieid) {
+        this.movieid = movieid;
+    }
+
+    public String getMovieTitle() {
+        return movieTitle;
+    }
+
+    public void setMovieTitle(String movieTitle) {
+        this.movieTitle = movieTitle;
+    }
+
+    public int getRuntime() {
+        return runtime;
+    }
+
+    public void setRuntime(int runtime) {
+        this.runtime = runtime;
+    }
+
+    public AgeEnum getAgelimit() {
+        return agelimit;
+    }
+
+    public void setAgelimit(AgeEnum agelimit) {
+        this.agelimit = agelimit;
+    }
+
+    public String getResume() {
+        return resume;
+    }
+
+    public void setResume(String resume) {
+        this.resume = resume;
+    }
+
+    public Set<GenreEnum> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(Set<GenreEnum> genres) {
+        this.genres = genres;
+    }
+
+    public List<Showing> getShowing() {
+        return showing;
+    }
+
+    public void setShowing(List<Showing> showing) {
+        this.showing = showing;
+    }
+
+
 }

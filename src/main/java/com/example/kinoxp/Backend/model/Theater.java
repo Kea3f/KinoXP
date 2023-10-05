@@ -1,6 +1,7 @@
 package com.example.kinoxp.Backend.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Theater {
@@ -10,6 +11,9 @@ public class Theater {
 
     private String theaterName;
     private int seatingCapacity;
+
+   @OneToMany(mappedBy = "theater")
+   private List<Showing> showing;
 
     public int getId() {
         return id;
