@@ -3,7 +3,7 @@ package com.example.kinoxp.Backend.model;
 import javax.persistence.*;
 
 @Entity
-public class EmployeeModel {
+public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

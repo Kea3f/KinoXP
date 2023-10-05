@@ -1,15 +1,19 @@
 package com.example.kinoxp.Backend.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-public class TheaterModel {
+public class Theater {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String theaterName;
     private int seatingCapacity;
+
+   @OneToMany(mappedBy = "theater")
+   private List<Showing> showing;
 
     public int getId() {
         return id;

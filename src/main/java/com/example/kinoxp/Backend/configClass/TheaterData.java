@@ -1,6 +1,6 @@
 package com.example.kinoxp.Backend.configClass;
 
-import com.example.kinoxp.Backend.model.TheaterModel;
+import com.example.kinoxp.Backend.model.Theater;
 import com.example.kinoxp.Backend.repositories.TheaterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -14,14 +14,14 @@ public class TheaterData implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        TheaterModel theater1 = new TheaterModel();
+        Theater theater1 = new Theater();
         theater1.setId(1);
         theater1.setTheaterName("BigBoi theater");
         theater1.setSeatingCapacity(400);
         theaterRepository.save(theater1);
 
 
-        TheaterModel theater2 = new TheaterModel();
+        Theater theater2 = new Theater();
         theater2.setId(2);
         theater2.setTheaterName("SmallBoi theater");
         theater2.setSeatingCapacity(240);

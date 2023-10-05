@@ -1,6 +1,6 @@
 package com.example.kinoxp.Backend.configClass;
 
-import com.example.kinoxp.Backend.model.EmployeeModel;
+import com.example.kinoxp.Backend.model.Employee;
 import com.example.kinoxp.Backend.repositories.EmployeeRepository;
 import com.example.kinoxp.Backend.repositories.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ public class EmployeeData implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        EmployeeModel employee1 = new EmployeeModel();
+        Employee employee1 = new Employee();
         employee1.setId(1);
         employee1.setPassword("Kea1234.");
         employee1.setEmployee_name("Naja M.");
@@ -28,7 +28,7 @@ public class EmployeeData implements CommandLineRunner {
         employeeRepository.save(employee1);
 
 
-        EmployeeModel employee2 = new EmployeeModel();
+        Employee employee2 = new Employee();
         employee2.setId(2);
         employee2.setPassword("Kea1234.");
         employee2.setEmployee_name("Sabrina E.");
@@ -39,7 +39,7 @@ public class EmployeeData implements CommandLineRunner {
         employeeRepository.save(employee2);
 
 
-        EmployeeModel employee3 = new EmployeeModel();
+        Employee employee3 = new Employee();
         employee3.setId(3);
         employee3.setPassword("Kea1234.");
         employee3.setEmployee_name("Heval P.");
@@ -50,7 +50,7 @@ public class EmployeeData implements CommandLineRunner {
         employeeRepository.save(employee3);
 
 
-        EmployeeModel employee4 = new EmployeeModel();
+        Employee employee4 = new Employee();
         employee4.setId(4);
         employee4.setPassword("Kea1234.");
         employee4.setEmployee_name("Mathilde T.");
