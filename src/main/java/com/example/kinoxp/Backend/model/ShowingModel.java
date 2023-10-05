@@ -8,12 +8,12 @@ import java.time.LocalDate;
 
 @Entity
 public class ShowingModel {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int showing_id;
-    private LocalDate startTime;
-    private LocalDate endTime;
-
+    private LocalDate startDate;
+    private LocalDate endDate;
 
     public int getShowing_id() {
         return showing_id;
@@ -23,21 +23,22 @@ public class ShowingModel {
         this.showing_id = showing_id;
     }
 
-    public LocalDate getStartTime() {
-        return startTime;
+    public LocalDate getStartDate() {
+        return startDate;
     }
 
-    public void setStartTime(LocalDate startTime) {
-        this.startTime = startTime;
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
     }
 
-    public LocalDate getEndTime() {
-        return endTime;
+    public LocalDate getEndDate() {
+        return endDate;
     }
 
-    public void setEndTime(LocalDate endTime) {
-        this.endTime = endTime;
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
     }
+
 
 
 
