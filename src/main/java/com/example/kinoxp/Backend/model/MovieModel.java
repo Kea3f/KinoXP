@@ -2,10 +2,8 @@ package com.example.kinoxp.Backend.model;
 
 import com.example.kinoxp.Backend.enums.AgeEnum;
 import com.example.kinoxp.Backend.enums.GenreEnum;
-import com.example.kinoxp.Backend.enums.TheaterEnum;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 
@@ -15,9 +13,9 @@ public class MovieModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     private String movie_title;
     private int run_time;
+    private int screening_period_in_days;
 
     public Set<GenreEnum> getGenres() {
         return genres;
@@ -84,17 +82,9 @@ public class MovieModel {
         this.screening_period_in_days = screening_period_in_days;
     }
 
-    public TheaterEnum getTheater() {
-        return theater;
-    }
 
-    public void setTheater(TheaterEnum theater) {
-        this.theater = theater;
-    }
 
-    private int screening_period_in_days;
-    private TheaterEnum theater;
-
+/*
     @ManyToMany
     @JoinTable(
             name = "employee_movie",
@@ -103,7 +93,7 @@ public class MovieModel {
     )
     private List<EmployeeModel> employees;
 
-
+*/
 
 
 }

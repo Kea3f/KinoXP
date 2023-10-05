@@ -5,6 +5,7 @@ import com.example.kinoxp.Backend.repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -22,8 +23,8 @@ public class EmployeeController {
     }
 
     @PostMapping("/login")
-    public String loginSubmit(@RequestParam int employee_number, @RequestParam String password, HttpSession session) {
-        EmployeeModel employee = employeeRepository.findByEmployeeNumber(employee_number);
+    public String loginSubmit(@PathVariable int id, @RequestParam String password, HttpSession session) {
+        EmployeeModel employee = employeeRepository.findAllById(id);
 
         if (employee != null && employee.getPassword().equals(password)) {
             session.setAttribute("employee", employee);
