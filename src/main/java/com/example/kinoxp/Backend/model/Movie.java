@@ -4,27 +4,49 @@ import com.example.kinoxp.Backend.enums.AgeEnum;
 import com.example.kinoxp.Backend.enums.GenreEnum;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 @Entity
 public class Movie {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int movieid;
     private String movieTitle;
     private int runtime;
     private AgeEnum agelimit;
+    @Column(length = 10000)
     private String resume;
-
 
     @ElementCollection(targetClass = GenreEnum.class)
     @CollectionTable(name = "movie_genres", joinColumns = @JoinColumn(name = "movieid"))
     @Enumerated(EnumType.STRING)
     private Set<GenreEnum> genres;
 
-    @OneToMany(mappedBy = "movie")
-    private List<Showing> showing;
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL) // Add cascade to handle cascade operations
+    private List<Showing> showings;
 
+    @ManyToOne
+    @JoinColumn(name = "theater_id") // The name of the foreign key column in the movie table
+    private Theater theater;
+
+    // Constructors, getters, setters, and other methods...
+
+    public void addShowing(Showing showing) {
+        if (showings == null) {
+            showings = new ArrayList<>();
+        }
+        showings.add(showing);
+        showing.setMovie(this); // Set the movie reference in the Showing entity
+    }
+
+    public void removeShowing(Showing showing) {
+        if (showings != null) {
+            showings.remove(showing);
+            showing.setMovie(null); // Remove the movie reference in the Showing entity
+        }
+    }
 
     public int getMovieid() {
         return movieid;
@@ -74,12 +96,12 @@ public class Movie {
         this.genres = genres;
     }
 
-    public List<Showing> getShowing() {
-        return showing;
+    public Theater getTheater() {
+        return theater;
     }
 
-    public void setShowing(List<Showing> showing) {
-        this.showing = showing;
+    public void setTheater(Theater theater) {
+        this.theater = theater;
     }
 
 
