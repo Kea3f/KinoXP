@@ -1,7 +1,10 @@
 package com.example.kinoxp.Backend.model;
 
+import org.apache.tomcat.jni.Local;
+
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 public class Showing {
@@ -11,6 +14,11 @@ public class Showing {
     private int showingid;
     private LocalDate startDate;
     private LocalDate endDate;
+
+    @Column(name = "showing_date")
+    private LocalDate showingDate;
+
+    private LocalTime showingTime;
 
     @ManyToOne
     @JoinColumn(name = "movie",referencedColumnName = "movieid")
@@ -52,5 +60,24 @@ public class Showing {
         this.movie = movie;
     }
 
+    public void setTheater(Theater theater) {
+        this.theater = theater;
+    }
+
+    public LocalDate getShowingDate() {
+        return showingDate;
+    }
+
+    public void setShowingDate(LocalDate showingDate) {
+        this.showingDate = showingDate;
+    }
+
+    public LocalTime getShowingTime() {
+        return showingTime;
+    }
+
+    public void setShowingTime(LocalTime showingTime) {
+        this.showingTime = showingTime;
+    }
 
 }
