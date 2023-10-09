@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -56,8 +56,31 @@
       text-decoration: none; /* Remove underline from the icon */
     }
   </style>
+  <script>
+    // Function to update the date and time
+    function updateDateTime() {
+      const dateTimeElement = document.getElementById("date-time");
+
+      // Get the current date and time
+      const now = new Date();
+
+      // Format the date and time as desired
+      const date = now.toLocaleDateString();
+      const time = now.toLocaleTimeString();
+
+      // Update the element
+      dateTimeElement.innerHTML = `<span>${date}</span><span>${time}</span>`;
+    }
+
+    // Call the updateDateTime function to display the date and time
+    updateDateTime();
+
+    // Set an interval to update the date and time every second
+    setInterval(updateDateTime, 1000);
+  </script>
 </head>
 <body>
+<header>
 <div class="menu-bar">
   <div class="date-time-container">
     <span id="date-time"></span>
@@ -71,29 +94,7 @@
     </a>
   </div>
 </div>
-
-<script>
-  // Function to update the date and time
-  function updateDateTime() {
-    const dateTimeElement = document.getElementById("date-time");
-
-    // Get the current date and time
-    const now = new Date();
-
-    // Format the date and time as desired
-    const date = now.toLocaleDateString();
-    const time = now.toLocaleTimeString();
-
-    // Update the element
-    dateTimeElement.innerHTML = `<span>${date}</span><span>${time}</span>`;
-  }
-
-  // Call the updateDateTime function to display the date and time
-  updateDateTime();
-
-  // Set an interval to update the date and time every second
-  setInterval(updateDateTime, 1000);
-</script>
+</header>
 
 </body>
 </html>

@@ -1,6 +1,7 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{menuBar.html}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -81,20 +82,17 @@
     </style>
 </head>
 <body>
+<div layout:fragment="content">
 
-<div class="menu-bar-container">
-    <iframe src="menuBar.html" class="menu-bar-iframe" frameborder="0"></iframe>
-</div>
-
-<div class="container">
-    <div class="buttons">
-        <button>Movie Booking</button>
-        <button>Accessing Booking Details</button>
-        <button>Movie Screening Coordination</button>
-        <button onclick="window.location.href='EmployeeList'">Employee Catalog</button>
-
+    <div class="container">
+        <div class="buttons">
+            <button>Movie Booking</button>
+            <button>Accessing Booking Details</button>
+            <button>Movie Screening Coordination</button>
+            <button onclick="window.location.href='EmployeeList'">Employee Catalog</button>
+        </div>
+        <img class="logo-img" src="../static/img/Logo.png" alt="KinoXP Logo">
     </div>
-    <img class="logo-img" src="../static/img/Logo.png" alt="KinoXP Logo">
 
 </div>
 </body>
