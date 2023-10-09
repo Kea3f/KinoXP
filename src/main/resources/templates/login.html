@@ -7,7 +7,7 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
+      background-color: white;
       margin: 0;
       padding: 0;
       display: flex;
@@ -20,7 +20,6 @@
       background-color: #fff;
       padding: 20px;
       border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -28,7 +27,7 @@
 
     .login-form {
       flex: 1;
-      padding-right: 20px;
+      padding-right: 150px;
     }
 
     h1, h2 {
@@ -42,7 +41,8 @@
 
     input[type="text"],
     input[type="password"] {
-      width: 100%;
+      display: block;
+      width: 70%;
       padding: 10px;
       margin-bottom: 10px;
       border: 1px solid #ccc;
@@ -59,14 +59,17 @@
     }
 
     button[type="submit"]:hover {
-      background-color: #333;
+      background-color: lightgrey;
     }
 
     /* Style for the image */
     .logo-img {
-      max-width: 100%;
+      max-width: 50%; /* Adjust the max-width to your desired size */
       height: auto;
     }
+
+
+
   </style>
 </head>
 <body>
@@ -74,19 +77,20 @@
   <div class="login-form">
     <h1>KinoXP</h1>
     <h2>Corporate portal</h2>
-    <form action="login.php" method="post"> <!-- Replace with your backend login script -->
-      <label for="username">Insert employee number:</label>
-      <input type="text" id="username" name="username" required>
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" required>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <form action="/login" method="post" onsubmit="return">
+      <input type="text" id="employeeId" name="employeeId" placeholder="Insert employee ID" required>
+      <input type="password" id="password" name="password" placeholder="Password" required>
+      <div id="error-message" style="color: red;" th:text="${error}"></div>
       <button type="submit">Login</button>
     </form>
-  </div>
 
-  <img src="../static/img/Logo.png" alt="KinoXP Logo">
+
+  </div>
+  <img class="logo-img" src="../static/img/Logo.png" alt="KinoXP Logo">
 </div>
+
+
+
 </body>
 </html>
-
-
-

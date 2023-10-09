@@ -8,7 +8,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: white;
             margin: 0;
             padding: 0;
             display: flex;
@@ -26,7 +26,7 @@
             max-width: 1200px;
         }
 
-        .image {
+        .logo-img {
             flex: 2;
             max-width: 60%;
             height: auto;
@@ -56,28 +56,46 @@
         }
 
         button:hover {
-            background-color: #000;
+            background-color: lightgrey;
             color: #fff;
         }
 
         button:active {
             background-color: lightgrey;
         }
+
+
+        .menu-bar-container {
+            width: 100%;
+            height: auto;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        .menu-bar-iframe {
+            width: 100%;
+            border: none;
+        }
+
     </style>
 </head>
 <body>
+
+<div class="menu-bar-container">
+    <iframe src="menuBar.html" class="menu-bar-iframe" frameborder="0"></iframe>
+</div>
 
 <div class="container">
     <div class="buttons">
         <button>Movie Booking</button>
         <button>Accessing Booking Details</button>
         <button>Movie Screening Coordination</button>
-    </div>
-    <!-- NAJA hvordan referer man til et billede???
-    TODO @Sabr5840 du højreklikker på billedets navn og vælger "path from source root" men husk at indsætte ../ før pathen
-    Eksempelvis er path til logoet: static/img/Logo.png så du skriver src="../static/img/Logo.png" -->
+        <button onclick="window.location.href='EmployeeList'">Employee Catalog</button>
 
-    <img class="image" src="your-image-source.jpg" alt="Movie Image">
+    </div>
+    <img class="logo-img" src="../static/img/Logo.png" alt="KinoXP Logo">
+
 </div>
 </body>
 </html>
