@@ -39,6 +39,12 @@ public class MovieRESTController {
         this.calendarDto = calendarDto;
     }
 
+    //Accessing calendar html
+    @GetMapping("/movie")
+    public String getMovie(){
+        return "calendar";
+    }
+
     // Search movies by title endpoint
     @GetMapping("/search")
     public ResponseEntity<List<String>> searchMoviesByTitle(@RequestParam("query") String query) {
