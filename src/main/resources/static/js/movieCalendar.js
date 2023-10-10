@@ -133,7 +133,6 @@ function jump() {
     currentMonth = parseInt(selectMonth.value);
     showCalendar(currentMonth, currentYear);
 }
-
 function showCalendar(month, year) {
     var firstDay = new Date(year, month).getDay();
 
@@ -179,35 +178,46 @@ function showCalendar(month, year) {
                         ) {
                             cell.className = "date-picker selected";
                         }
-// Inside the loop where you create calendar cells
-                        cell.addEventListener("click", function () {
-                            // Hide all other popups before showing this one
-                            var allPopups = document.querySelectorAll(".movie-popup");
-                            allPopups.forEach(function (otherPopup) {
-                                otherPopup.style.display = "none";
-                            });
 
-                            // Populate the movie information here based on the clicked date
-                            var selectedDate = this.getAttribute("data-date");
-                            var selectedMonth = this.getAttribute("data-month");
-                            var selectedYear = this.getAttribute("data-year");
+                        // Create a dropdown element for displaying movie info
+                        var dropdown = document.createElement("select");
+                        dropdown.className = "movie-dropdown";
+                        dropdown.style.display = "none"; // Initially hide the dropdown
 
-                            // Find the event for the selected date, month, and year
-                            var selectedEvent = events.find(function (event) {
-                                var eventDate = new Date(event.showingDate);
-                                return (
-                                    eventDate.getDate() === parseInt(selectedDate) &&
-                                    eventDate.getMonth() === parseInt(selectedMonth) &&
-                                    eventDate.getFullYear() === parseInt(selectedYear)
-                                );
-                            });
-
-                            // Create and append the movie popup to the "moviedatepopup" div
-                            var popup = createMoviePopup(selectedEvent);
-                            var moviedatepopup = document.getElementById("moviedatepopup");
-                            moviedatepopup.innerHTML = ""; // Clear any existing popups
-                            moviedatepopup.appendChild(popup);
+                        // Populate the dropdown with movie information
+                        events.forEach(function (event) {
+                            var eventDate = new Date(event.showingDate);
+                            if (
+                                eventDate.getDate() === date &&
+                                eventDate.getMonth() === month &&
+                                eventDate.getFullYear() === year
+                            ) {
+                                var option = document.createElement("option");
+                                option.text = event.title + " at " + event.showingTime;
+                                dropdown.add(option);
+                            }
                         });
+
+                        // Add a click event listener to the cell
+                        cell.addEventListener("click", function () {
+                            // Hide all other dropdowns before showing this one
+                            var allDropdowns = document.querySelectorAll(".movie-dropdown");
+                            allDropdowns.forEach(function (otherDropdown) {
+                                otherDropdown.style.display = "none";
+                            });
+
+                            // Show or hide the dropdown for this cell
+                            var selectedDropdown = this.querySelector(".movie-dropdown");
+                            if (selectedDropdown.style.display === "none") {
+                                selectedDropdown.style.display = "block";
+                            } else {
+                                selectedDropdown.style.display = "none";
+                            }
+                        });
+
+                        // Append the dropdown to the cell
+                        cell.appendChild(dropdown);
+
                         row.appendChild(cell);
                         date++;
                     }
@@ -216,6 +226,7 @@ function showCalendar(month, year) {
             }
         });
 }
+
     function daysInMonth(iMonth, iYear) {
         return 32 - new Date(iYear, iMonth, 32).getDate();
     }
