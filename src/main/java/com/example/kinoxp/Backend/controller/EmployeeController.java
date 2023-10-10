@@ -3,13 +3,13 @@ package com.example.kinoxp.Backend.controller;
 import com.example.kinoxp.Backend.model.Employee;
 import com.example.kinoxp.Backend.repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class EmployeeController {
@@ -17,31 +17,92 @@ public class EmployeeController {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    @GetMapping("/login")
-    public String loginForm() {
+    @GetMapping("/login") //Display for the frontpage
+    public String showLoginForm() {
         return "login";
     }
 
-    @PostMapping("/login")
-    public String loginSubmit(@PathVariable int id, @RequestParam String password, HttpSession session) {
-        Employee employee = employeeRepository.findAllById(id);
+    @GetMapping("/homepage")
+    public String showHomepage() {
+        return "homepage"; // This should match the name of your HTML template
+    }
 
-        if (employee != null && employee.getPassword().equals(password)) {
-            session.setAttribute("employee", employee);
-            return "redirect:/homepage";
-        } else {
-            return "login"; // husk af lave fejl besked i html siden
+    @PostMapping("/login")
+    public String login(@RequestParam("employeeId") int employeeId, @RequestParam("password") String password, HttpSession session, Model model) {
+        try {
+            Employee employee = employeeRepository.findById(employeeId).orElse(null);
+            if (employee == null || !employee.getPassword().equals(password)) {
+                model.addAttribute("error", "Employee ID or password is incorrect");
+                return "login"; // Return to the login page with an error message
+            }
+
+            // Set a session attribute to indicate that the user is logged in (you can customize this)
+            session.setAttribute("loggedIn", true);
+
+            // Redirect to the homepage
+            return "redirect:/homepage"; // Assuming "homepage" is the URL mapping for your homepage
+        } catch (Exception e) {
+            model.addAttribute("error", "Employee ID or password is incorrect");
+            return "login"; // Return to the login page with an error message
         }
     }
 
-    @GetMapping("/homepage")
-    public String dashboard(HttpSession session) {
-        Employee employee = (Employee) session.getAttribute("employee");
+
+    @GetMapping("/employees") // Display the employee list page
+    public String showEmployees(Model model) {
+        List<Employee> employees = employeeRepository.findAll();
+        model.addAttribute("employees", employees);
+        return "employeeList"; // Assuming you have an "employeeList.html" template
+    }
+
+    @GetMapping("/employees/{id}") // View a specific employee
+    public String viewEmployee(@PathVariable int id, Model model) {
+        Employee employee = employeeRepository.findById(id).orElse(null);
         if (employee != null) {
-            return "homepage";
-        } else {
-            return "redirect:/login";
+            model.addAttribute("employee", employee);
         }
+        return "employeeDetails"; // Assuming you have an "employeeDetails.html" template
+    }
+
+
+    @GetMapping("/employees/edit/{id}") // Edit a specific employee
+    public String editEmployee(@PathVariable int id, Model model) {
+        Employee employee = employeeRepository.findById(id).orElse(null);
+        if (employee != null) {
+            model.addAttribute("employee", employee);
+        }
+        return "editEmployee"; // Assuming you have an "editEmployee.html" template
+    }
+
+
+    @PostMapping("/employees/save") // Save edited employee details
+    public String saveEmployee(@ModelAttribute Employee employee) {
+        // Implement logic to save the edited employee details to the database
+        // Redirect to the employee list page after saving
+        employeeRepository.save(employee);
+        return "redirect:/employees";
+    }
+
+
+    @GetMapping("/employees/delete/{id}") // Delete a specific employee
+    public String deleteEmployee(@PathVariable int id) {
+        // Implement logic to delete the employee from the database
+        employeeRepository.deleteById(id);
+        // Redirect to the employee list page after deleting
+        return "redirect:/employees";
+    }
+
+
+    @GetMapping("/logout") // Log out the user
+    public String logout(HttpSession session) {
+        // Invalidate the session to log out the user
+        session.invalidate();
+        return "redirect:/login"; // Redirect to the login page after logout
+    }
+
+    @GetMapping("/EmployeeList")
+    public String showEmployeeList() {
+        return "employeeList";
     }
 
 

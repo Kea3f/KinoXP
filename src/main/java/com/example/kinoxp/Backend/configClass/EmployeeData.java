@@ -18,7 +18,7 @@ public class EmployeeData implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         Employee employee1 = new Employee();
-        employee1.setId(1);
+        employee1.setEmployeeId(1);
         employee1.setPassword("Kea1234.");
         employee1.setEmployee_name("Naja M.");
         employee1.setEmployee_mail("najamoe@outlook.dk");
@@ -29,7 +29,7 @@ public class EmployeeData implements CommandLineRunner {
 
 
         Employee employee2 = new Employee();
-        employee2.setId(2);
+        employee2.setEmployeeId(2);
         employee2.setPassword("Kea1234.");
         employee2.setEmployee_name("Sabrina E.");
         employee2.setEmployee_mail("Sabrina.ebbesen@gmail.com");
@@ -40,7 +40,7 @@ public class EmployeeData implements CommandLineRunner {
 
 
         Employee employee3 = new Employee();
-        employee3.setId(3);
+        employee3.setEmployeeId(3);
         employee3.setPassword("Kea1234.");
         employee3.setEmployee_name("Heval P.");
         employee3.setEmployee_mail("HevalP@outlook.dk");
@@ -51,7 +51,7 @@ public class EmployeeData implements CommandLineRunner {
 
 
         Employee employee4 = new Employee();
-        employee4.setId(4);
+        employee4.setEmployeeId(4);
         employee4.setPassword("Kea1234.");
         employee4.setEmployee_name("Mathilde T.");
         employee4.setEmployee_mail("Trendy@gmail.com");

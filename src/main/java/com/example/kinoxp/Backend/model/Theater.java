@@ -7,20 +7,19 @@ import java.util.List;
 public class Theater {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
+    private int theaterid;
     private String theaterName;
     private int seatingCapacity;
 
    @OneToMany(mappedBy = "theater")
-   private List<Showing> showing;
+   private List<Showing> showings;
 
-    public int getId() {
-        return id;
+    public int getTheaterid() {
+        return theaterid;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setTheaterid(int theaterid) {
+        this.theaterid = theaterid;
     }
 
     public String getTheaterName() {

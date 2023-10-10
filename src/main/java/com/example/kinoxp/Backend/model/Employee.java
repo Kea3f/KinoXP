@@ -5,21 +5,23 @@ import javax.persistence.*;
 @Entity
 public class Employee {
 
+    public int getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int employeeId;
     private String password;
     private String employee_name;
     private int employee_phoneNo;
     private String employee_mail;
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int employee_number) {
-        this.id = employee_number;
-    }
 
     public String getPassword() {
         return password;
