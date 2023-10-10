@@ -33,19 +33,6 @@ function populateDropdownWithMovieTitles(query) {
     });
 }
 
-// Search bar
-$("#search-input").on("input", function () {
-    var query = $(this).val().trim();
-    var dropdown = $("#movieDropdown");
-
-    if (query.length >= 2) { // if length is greater than or equal to 2
-        // Populate the dropdown with movie titles
-        populateDropdownWithMovieTitles(query);
-    } else {
-        dropdown.empty(); // If query length is less than 2, clear the dropdown
-    }
-});
-
 // Handle movie selection from the dropdown using event delegation
 $("#movieDropdown").on("click", "a", function () {
     const selectedTitle = $(this).text();
@@ -88,9 +75,7 @@ currentYear = today.getFullYear();
 selectYear = document.getElementById("year");
 selectMonth = document.getElementById("month");
 
-
 createYear = generate_year_range(1990, 2050);
-
 
 document.getElementById("year").innerHTML = createYear;
 
@@ -102,7 +87,7 @@ var days = "";
 
 var monthDefault = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-var dayDefault = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat","Sun"];
+var dayDefault = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 var $dataHead = "<tr>";
 for (dhead in days) {
@@ -110,7 +95,7 @@ for (dhead in days) {
 }
 $dataHead += "</tr>";
 
-//alert($dataHead);
+// alert($dataHead);
 document.getElementById("thead-month").innerHTML = $dataHead;
 
 monthAndYear = document.getElementById("monthAndYear");
@@ -133,6 +118,7 @@ function jump() {
     currentMonth = parseInt(selectMonth.value);
     showCalendar(currentMonth, currentYear);
 }
+
 function showCalendar(month, year) {
     var firstDay = new Date(year, month).getDay();
 
@@ -215,7 +201,57 @@ function showCalendar(month, year) {
                             }
                         });
 
-                        // Append the dropdown to the cell
+                        // Add a click event listener to the dropdown options
+                        dropdown.addEventListener("change", function () {
+                            // Get the selected option
+                            var selectedOption = dropdown.options[dropdown.selectedIndex];
+                            var selectedTitle = selectedOption.text;
+
+                            // Make an AJAX request to fetch movie details based on the selected title
+                            fetch("/api/movies/details?title=" + selectedTitle)
+                                .then(function (response) {
+                                    return response.json();
+                                })
+                                .then(function (data) {
+                                    // Create a popup div element for displaying movie details
+                                    var movieDetailsPopup = document.createElement("div");
+                                    movieDetailsPopup.id = "movieDetailsPopup";
+                                    movieDetailsPopup.className = "movie-details-popup";
+
+                                    // Create HTML elements to display movie details
+                                    var titleElement = document.createElement("h2");
+                                    titleElement.textContent = data.title;
+
+                                    var runtimeElement = document.createElement("p");
+                                    runtimeElement.textContent = "Runtime: " + data.runtime + " minutes";
+
+                                    var ageLimitElement = document.createElement("p");
+                                    ageLimitElement.textContent = "Age Limit: " + data.ageLimit;
+
+                                    var resumeElement = document.createElement("p");
+                                    resumeElement.textContent = "Summary: " + data.resume;
+
+                                    // Append elements to the popup
+                                    movieDetailsPopup.appendChild(titleElement);
+                                    movieDetailsPopup.appendChild(runtimeElement);
+                                    movieDetailsPopup.appendChild(ageLimitElement);
+                                    movieDetailsPopup.appendChild(resumeElement);
+
+                                    // Add a close button to the popup
+                                    var closeButton = document.createElement("button");
+                                    closeButton.textContent = "Close";
+                                    closeButton.addEventListener("click", function () {
+                                        // Close the popup when the close button is clicked
+                                        movieDetailsPopup.style.display = "none";
+                                    });
+
+                                    movieDetailsPopup.appendChild(closeButton);
+
+                                    // Append the popup to the body
+                                    document.body.appendChild(movieDetailsPopup);
+                                });
+                        });
+
                         cell.appendChild(dropdown);
 
                         row.appendChild(cell);
@@ -227,7 +263,6 @@ function showCalendar(month, year) {
         });
 }
 
-    function daysInMonth(iMonth, iYear) {
-        return 32 - new Date(iYear, iMonth, 32).getDate();
-    }
-
+function daysInMonth(iMonth, iYear) {
+    return 32 - new Date(iYear, iMonth, 32).getDate();
+}
