@@ -6,7 +6,6 @@ import com.example.kinoxp.Backend.model.Movie;
 import com.example.kinoxp.Backend.model.Showing;
 import com.example.kinoxp.Backend.repositories.MovieRepository;
 import com.example.kinoxp.Backend.repositories.ShowingRepository;
-import com.example.kinoxp.Backend.repositories.TheaterRepository;
 import com.example.kinoxp.Backend.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,31 +19,18 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/movies")
 public class MovieRESTController {
     private final MovieService movieService;
-    private final TheaterRepository theaterRepository;
     private final MovieRepository movieRepository;
     private final ShowingRepository showingRepository;
-    private CalendarDto calendarDto;
 
     @Autowired
     public MovieRESTController(
-            CalendarDto calendarDto,
             MovieService movieService,
-            TheaterRepository theaterRepository,
             MovieRepository movieRepository,
             ShowingRepository showingRepository) {
         this.movieService = movieService;
-        this.theaterRepository = theaterRepository;
         this.movieRepository = movieRepository;
         this.showingRepository = showingRepository; // Add this line to inject showingRepository
-        this.calendarDto = calendarDto;
     }
-
-    //Accessing calendar html
-    @GetMapping("/movie")
-    public String getMovie(){
-        return "calendar";
-    }
-
     // Search movies by title endpoint
     @GetMapping("/search")
     public ResponseEntity<List<String>> searchMoviesByTitle(@RequestParam("query") String query) {
@@ -74,10 +60,9 @@ public class MovieRESTController {
             CalendarDto calendarDto = new CalendarDto();
             calendarDto.setTitle(showing.getMovie().getMovieTitle()); // Set the movie title
             calendarDto.setShowingDate(showing.getShowingDate()); // Set the showing date
-
+            calendarDto.setShowingTime(showing.getShowingTime()); // Set the showing time
             calendarEvents.add(calendarDto);
         }
-
         return new ResponseEntity<>(calendarEvents, HttpStatus.OK);
     }
 }

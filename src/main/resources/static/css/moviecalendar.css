@@ -147,6 +147,17 @@
     padding: 5px 1em;
 }
 
+/* Define the background color for the selected date cell */
+.date-picker.selected {
+    background-color: darkgrey;
+    cursor: pointer; /* Change cursor to pointer when hovering over a selectable date */
+}
+
+/* Define a hover effect for date cells */
+.date-picker:hover {
+    background-color: slategrey; /* Change background color on hover */
+}
+
 
 
 

@@ -4,12 +4,23 @@ import com.example.kinoxp.Backend.model.Showing;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Component
 public class CalendarDto {
 
     private String title;
     private LocalDate showingDate;
+
+    private LocalTime showingTime;
+
+    public LocalTime getShowingTime() {
+        return showingTime;
+    }
+
+    public void setShowingTime(LocalTime showingTime) {
+        this.showingTime = showingTime;
+    }
 
     public String getTitle() {
         return title;
