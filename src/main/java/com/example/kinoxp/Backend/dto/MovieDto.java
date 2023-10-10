@@ -4,6 +4,7 @@ import com.example.kinoxp.Backend.enums.AgeEnum;
 import com.example.kinoxp.Backend.enums.GenreEnum;
 import com.example.kinoxp.Backend.model.Theater;
 
+import java.time.LocalDate;
 import java.util.Set;
 
 public class MovieDto {
@@ -13,6 +14,16 @@ public class MovieDto {
     private String resume;
     private Set<GenreEnum> genres;
     private Theater theater;
+
+    private LocalDate showingDate;
+
+    public LocalDate getShowingDate() {
+        return showingDate;
+    }
+
+    public void setShowingDate(LocalDate showingDate) {
+        this.showingDate = showingDate;
+    }
 
     public String getTitle() {
         return title;

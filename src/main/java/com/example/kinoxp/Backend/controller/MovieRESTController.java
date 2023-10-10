@@ -60,10 +60,9 @@ public class MovieRESTController {
             CalendarDto calendarDto = new CalendarDto();
             calendarDto.setTitle(showing.getMovie().getMovieTitle()); // Set the movie title
             calendarDto.setShowingDate(showing.getShowingDate()); // Set the showing date
-
+            calendarDto.setShowingTime(showing.getShowingTime()); // Set the showing time
             calendarEvents.add(calendarDto);
         }
-
         return new ResponseEntity<>(calendarEvents, HttpStatus.OK);
     }
 }
