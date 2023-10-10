@@ -1,6 +1,3 @@
-let currentYear = new Date().getFullYear();
-let currentMonth = new Date().getMonth();
-
 // Function to populate the dropdown with movie titles
 function populateDropdownWithMovieTitles(query) {
     $.get("/api/movies/search?query=" + query, function (data) { // Updated URL with the query
@@ -55,10 +52,10 @@ function displayMovieDetails(title) {
     });
 }
 
-function  generate_year_range(start, end){
-    var years ="";
-    for(var year = start; year <= end; year++){
-        years += "<option value=" + year + ">" + year + "</option>";
+function generate_year_range(start, end) {
+    var years = "";
+    for (var year = start; year <= end; year++) {
+        years += "<option value='" + year + "'>" + year + "</option>";
     }
     return years;
 }
@@ -69,16 +66,38 @@ currentYear = today.getFullYear();
 selectYear = document.getElementById("year");
 selectMonth = document.getElementById("month");
 
-createYear = generate_year_range(1990,2040);
+
+createYear = generate_year_range(1970, 2050);
+/** or
+ * createYear = generate_year_range( 1970, currentYear );
+ */
+
+document.getElementById("year").innerHTML = createYear;
 
 var calendar = document.getElementById("calendar");
-var lang = calendar.getAttribute("data-lang");
+var lang = calendar.getAttribute('data-lang');
 
 var months = "";
 var days = "";
 
-var monthDefault = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October","November", "December"];
-var DayDefault = ["Sun", "Mon", "Tue", "Wed", "Thu"];
+var monthDefault = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+var dayDefault = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+if (lang == "en") {
+    months = monthDefault;
+    days = dayDefault;
+} else if (lang == "id") {
+    months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+    days = ["Ming", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"];
+} else if (lang == "fr") {
+    months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
+    days = ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"];
+} else {
+    months = monthDefault;
+    days = dayDefault;
+}
+
 
 var $dataHead = "<tr>";
 for (dhead in days) {
@@ -89,8 +108,11 @@ $dataHead += "</tr>";
 //alert($dataHead);
 document.getElementById("thead-month").innerHTML = $dataHead;
 
+
 monthAndYear = document.getElementById("monthAndYear");
 showCalendar(currentMonth, currentYear);
+
+
 
 function next() {
     currentYear = (currentMonth === 11) ? currentYear + 1 : currentYear;
@@ -130,6 +152,7 @@ function showCalendar(month, year) {
 
         var row = document.createElement("tr");
 
+
         for ( var j = 0; j < 7; j++ ) {
             if ( i === 0 && j < firstDay ) {
                 cell = document.createElement( "td" );
@@ -157,7 +180,6 @@ function showCalendar(month, year) {
         tbl.appendChild(row);
     }
 }
-
 function daysInMonth(iMonth, iYear) {
     return 32 - new Date(iYear, iMonth, 32).getDate();
 }
