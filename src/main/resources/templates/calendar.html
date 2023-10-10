@@ -15,7 +15,15 @@
 <div id="movieDropdown"></div>
 
 <h2>Movie Details</h2>
-<div id="movieDetailsPopup"></div>
+<div id="movieDetailsPopup" class="movie-details-popup">
+    <h2 id="movieTitle"></h2>
+    <p id="movieRuntime"></p>
+    <p id="movieAgeLimit"></p>
+    <p id="movieSummary"></p>
+    <button id="closeButton">Close</button>
+</div>
+
+
 <div class="wrapper">
     <div class="container-calendar">
         <h3 id="monthAndYear"></h3>
@@ -44,7 +52,6 @@
                 <option value=11>Dec</option>
             </select>
             <select id="year" onchange="jump()"></select>
-<div id="moviedatepopup"></div>
         </div>
     </div>
 </div>

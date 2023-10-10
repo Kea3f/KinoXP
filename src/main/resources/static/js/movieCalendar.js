@@ -1,4 +1,47 @@
-// Function to create a date-specific popup
+// Function to populate the dropdown with movie titles
+function populateDropdownWithMovieTitles(query) {
+    $.get("/api/movies/search?query=" + query, function (data) {
+        const dropdown = $("#movieDropdown");
+        dropdown.empty(); // Clear existing items
+
+        data.forEach(title => {
+            const a = $("<a>").text(title);
+            dropdown.append(a);
+        });
+    });
+}
+
+// Function to search movies by title
+function searchMoviesByTitle(query) {
+    $.get("/search?query=" + query, function (data) {
+        // 'data' will contain the list of matching movie titles
+        // You can process the data here, such as populating a dropdown or autocomplete field
+        console.log(data); // Log the matching titles to the console for testing
+    })
+        .fail(function (error) {
+            // Handle any errors that occur during the AJAX request
+            console.error("Error searching for movies:", error);
+        });
+}
+
+// Function to handle search input changes
+function handleSearchInputChange() {
+    const query = $("#search-input").val(); // Get the search query from the input field
+    if (query.trim() !== "") {
+        // Call both functions to populate the dropdown and search for movies
+        populateDropdownWithMovieTitles(query);
+        searchMoviesByTitle(query);
+    } else {
+        // Clear the dropdown and handle other actions if needed when the input is empty
+        const dropdown = $("#movieDropdown");
+        dropdown.empty();
+    }
+}
+
+// Bind the handleSearchInputChange function to the input field's change event
+$("#search-input").on("input", handleSearchInputChange);
+
+
 function createMoviePopup(selectedEvent) {
     // Create a div element for displaying movie info (date-specific popup)
     var popup = document.createElement("div");
@@ -17,21 +60,19 @@ function createMoviePopup(selectedEvent) {
     // Append the movieInfo to the popup
     popup.appendChild(movieInfo);
 
+    // Add a click event listener to close the popup when clicking outside of it
+    document.addEventListener("click", function (event) {
+        if (!popup.contains(event.target)) {
+            // Clicked outside the popup, so close it
+            popup.style.display = "none";
+        }
+    });
+
     return popup;
 }
 
-// Function to populate the dropdown with movie titles
-function populateDropdownWithMovieTitles(query) {
-    $.get("/api/movies/search?query=" + query, function (data) { // Updated URL with the query
-        const dropdown = $("#movieDropdown");
-        dropdown.empty(); // Clear existing items
 
-        data.forEach(title => {
-            const a = $("<a>").text(title);
-            dropdown.append(a);
-        });
-    });
-}
+
 
 // Handle movie selection from the dropdown using event delegation
 $("#movieDropdown").on("click", "a", function () {
@@ -182,6 +223,60 @@ function showCalendar(month, year) {
                                 option.text = event.title + " at " + event.showingTime;
                                 dropdown.add(option);
                             }
+                        });
+// ...
+
+// Add a click event listener to the cell
+                        cell.addEventListener("click", function () {
+                            // Hide all other dropdowns before showing this one
+                            var allDropdowns = document.querySelectorAll(".movie-dropdown");
+                            allDropdowns.forEach(function (otherDropdown) {
+                                otherDropdown.style.display = "none";
+                            });
+
+                            // Show or hide the dropdown for this cell
+                            var selectedDropdown = this.querySelector(".movie-dropdown");
+                            if (selectedDropdown.style.display === "none") {
+                                selectedDropdown.style.display = "block";
+                            } else {
+                                selectedDropdown.style.display = "none";
+                            }
+                        });
+
+// Add a click event listener to the dropdown options
+                        dropdown.addEventListener("change", function () {
+                            // Get the selected option
+                            var selectedOption = dropdown.options[dropdown.selectedIndex];
+                            var selectedTitle = selectedOption.text;
+
+                            // Make an AJAX request to fetch movie details based on the selected title
+                            fetch("/api/movies/details?title=" + selectedTitle)
+                                .then(function (response) {
+                                    return response.json();
+                                })
+                                .then(function (data) {
+                                    // Populate the movie details popup
+                                    var movieTitle = document.getElementById("movieTitle");
+                                    var movieRuntime = document.getElementById("movieRuntime");
+                                    var movieAgeLimit = document.getElementById("movieAgeLimit");
+                                    var movieSummary = document.getElementById("movieSummary");
+
+                                    movieTitle.textContent = data.title;
+                                    movieRuntime.textContent = "Runtime: " + data.runtime + " minutes";
+                                    movieAgeLimit.textContent = "Age Limit: " + data.ageLimit;
+                                    movieSummary.textContent = "Summary: " + data.resume;
+
+                                    // Show the movie details popup
+                                    var movieDetailsPopup = document.getElementById("movieDetailsPopup");
+                                    movieDetailsPopup.style.display = "block";
+
+                                    // Add a click event listener to the close button
+                                    var closeButton = document.getElementById("closeButton");
+                                    closeButton.addEventListener("click", function () {
+                                        // Close the popup when the close button is clicked
+                                        movieDetailsPopup.style.display = "none";
+                                    });
+                                });
                         });
 
                         // Add a click event listener to the cell
