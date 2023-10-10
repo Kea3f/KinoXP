@@ -28,25 +28,9 @@ public class Movie {
     private List<Showing> showings;
 
     @ManyToOne
-    @JoinColumn(name = "theater_id") // The name of the foreign key column in the movie table
+    @JoinColumn(name = "theaterid") // The name of the foreign key column in the movie table
     private Theater theater;
 
-    // Constructors, getters, setters, and other methods...
-
-    public void addShowing(Showing showing) {
-        if (showings == null) {
-            showings = new ArrayList<>();
-        }
-        showings.add(showing);
-        showing.setMovie(this); // Set the movie reference in the Showing entity
-    }
-
-    public void removeShowing(Showing showing) {
-        if (showings != null) {
-            showings.remove(showing);
-            showing.setMovie(null); // Remove the movie reference in the Showing entity
-        }
-    }
 
     public int getMovieid() {
         return movieid;

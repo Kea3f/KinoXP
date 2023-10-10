@@ -21,12 +21,20 @@ public class Showing {
     private LocalTime showingTime;
 
     @ManyToOne
-    @JoinColumn(name = "movie",referencedColumnName = "movieid")
+    @JoinColumn(name = "movie_id")
     private Movie movie;
 
     @ManyToOne
-    @JoinColumn(name = "theater", referencedColumnName = "id")
+    @JoinColumn(name = "theaterid") // The name of the foreign key column in the movie table
     private Theater theater;
+
+    public Theater getTheater() {
+        return theater;
+    }
+
+    public void setTheater(Theater theater) {
+        this.theater = theater;
+    }
 
     public int getShowingid() {
         return showingid;
@@ -58,10 +66,6 @@ public class Showing {
 
     public void setMovie(Movie movie) {
         this.movie = movie;
-    }
-
-    public void setTheater(Theater theater) {
-        this.theater = theater;
     }
 
     public LocalDate getShowingDate() {

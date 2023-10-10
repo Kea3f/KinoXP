@@ -14,17 +14,20 @@ public class TheaterData implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Theater theater1 = new Theater();
-        theater1.setId(1);
-        theater1.setTheaterName("BigBoi theater");
-        theater1.setSeatingCapacity(400);
-        theaterRepository.save(theater1);
+        if (!theaterRepository.existsById(1)) {
+            Theater theater1 = new Theater();
+            theater1.setTheaterid(1);
+            theater1.setTheaterName("BigBoi theater");
+            theater1.setSeatingCapacity(400);
+            theaterRepository.save(theater1);
 
-
-        Theater theater2 = new Theater();
-        theater2.setId(2);
-        theater2.setTheaterName("SmallBoi theater");
-        theater2.setSeatingCapacity(240);
-        theaterRepository.save(theater2);
+            if (!theaterRepository.existsById(2)) {
+                Theater theater2 = new Theater();
+                theater2.setTheaterid(2);
+                theater2.setTheaterName("SmallBoi theater");
+                theater2.setSeatingCapacity(240);
+                theaterRepository.save(theater2);
+            }
+        }
     }
 }

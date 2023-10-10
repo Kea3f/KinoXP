@@ -38,6 +38,7 @@ public class MovieRESTController {
         this.showingRepository = showingRepository; // Add this line to inject showingRepository
         this.calendarDto = calendarDto;
     }
+
     // Search movies by title endpoint
     @GetMapping("/search")
     public ResponseEntity<List<String>> searchMoviesByTitle(@RequestParam("query") String query) {
