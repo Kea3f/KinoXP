@@ -32,7 +32,6 @@ public class MovieService {
         movieDto.setRuntime(movie.getRuntime());
         movieDto.setAgeLimit(movie.getAgelimit());
         movieDto.setResume(movie.getResume());
-        movieDto.setTheater(movie.getTheater()); // Use parentheses to call the setter
         return movieDto;
     }
 

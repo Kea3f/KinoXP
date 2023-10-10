@@ -55,7 +55,7 @@ function displayMovieDetails(title) {
     });
 }
 
-function  genereate_year_range(start, end){
+function  generate_year_range(start, end){
     var years ="";
     for(var year = start; year <= end; year++){
         years += "<option value=" + year + ">" + year + "</option>";

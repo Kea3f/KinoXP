@@ -27,10 +27,17 @@ public class Movie {
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL) // Add cascade to handle cascade operations
     private List<Showing> showings;
 
-    @ManyToOne
-    @JoinColumn(name = "theaterid") // The name of the foreign key column in the movie table
-    private Theater theater;
+    @ManyToMany(mappedBy = "movies")
+    private List<Theater> theaters;
 
+    @ManyToOne
+    @JoinColumn(name = "theaterid") // Define the foreign key column
+    private Theater theater; // Represents the relationship to Theater
+
+
+    public void setTheaters(List<Theater> theaters) {
+        this.theaters = theaters;
+    }
 
     public int getMovieid() {
         return movieid;
@@ -80,13 +87,6 @@ public class Movie {
         this.genres = genres;
     }
 
-    public Theater getTheater() {
-        return theater;
-    }
-
     public void setTheater(Theater theater) {
-        this.theater = theater;
     }
-
-
 }

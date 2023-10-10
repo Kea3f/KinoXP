@@ -14,6 +14,9 @@ public class Theater {
    @OneToMany(mappedBy = "theater")
    private List<Showing> showings;
 
+    @ManyToMany
+    private List<Movie> movies;
+
     public int getTheaterid() {
         return theaterid;
     }

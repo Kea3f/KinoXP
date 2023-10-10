@@ -5,6 +5,7 @@ import org.apache.tomcat.jni.Local;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Set;
 
 @Entity
 public class Showing {
@@ -31,6 +32,7 @@ public class Showing {
     public Theater getTheater() {
         return theater;
     }
+    
 
     public void setTheater(Theater theater) {
         this.theater = theater;
@@ -84,4 +86,6 @@ public class Showing {
         this.showingTime = showingTime;
     }
 
+    public void setTheaters(Set<Theater> theaters) {
+    }
 }
