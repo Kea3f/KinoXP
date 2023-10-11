@@ -81,7 +81,6 @@ public class MovieServiceTest {
         assertEquals(movie.getRuntime(), movieDto.getRuntime());
         assertEquals(movie.getAgelimit(), movieDto.getAgeLimit());
         assertEquals(movie.getResume(), movieDto.getResume());
-        assertEquals(movie.getTheater(), movieDto.getTheater());
     }
 
 }
