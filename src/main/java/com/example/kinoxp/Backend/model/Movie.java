@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Set;
 @Entity
 public class Movie {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int movieid;
@@ -34,6 +33,8 @@ public class Movie {
     @JoinColumn(name = "theaterid") // Define the foreign key column
     private Theater theater; // Represents the relationship to Theater
 
+    @OneToMany(mappedBy = "movie")
+    private List<Booking> bookings;
 
     public void setTheaters(List<Theater> theaters) {
         this.theaters = theaters;
