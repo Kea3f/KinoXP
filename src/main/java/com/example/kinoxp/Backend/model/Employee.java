@@ -5,6 +5,16 @@ import javax.persistence.*;
 @Entity
 public class Employee {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int employeeId;
+
+    private String password;
+    private String username;
+    private String employee_name;
+    private int employee_phoneNo;
+    private String employee_mail;
+
     public int getEmployeeId() {
         return employeeId;
     }
@@ -13,14 +23,14 @@ public class Employee {
         this.employeeId = employeeId;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int employeeId;
-    private String password;
-    private String employee_name;
-    private int employee_phoneNo;
-    private String employee_mail;
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
 
     public String getPassword() {
