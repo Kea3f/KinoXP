@@ -31,55 +31,78 @@ public class MovieData implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        if (!theaterRepository.existsById(1)) {
-            Theater theater1 = new Theater();
-            theater1.setTheaterid(1);
-            theater1.setTheaterName("BigBoi theater");
-            theater1.setSeatingCapacity(400);
-            theaterRepository.save(theater1);
+        // Create a Theater instance for "Independence Day"
+        Theater theater1 = new Theater();
+        theater1.setTheaterName("BigBoi theater");
+        theater1.setSeatingCapacity(400);
+        theaterRepository.save(theater1);
 
-            if (!theaterRepository.existsById(2)) {
-                Theater theater2 = new Theater();
-                theater2.setTheaterid(2);
-                theater2.setTheaterName("SmallBoi theater");
-                theater2.setSeatingCapacity(240);
-                theaterRepository.save(theater2);
-            }
+// Check if the movie exists, and if not, create and save it
+        if (!movieRepository.existsByMovieTitle("Independence day")) {
+            // Create a Movie instance for "Independence Day"
+            Movie movie1 = new Movie();
+            movie1.setMovieTitle("Independence day");
+            movie1.setRuntime(120);
+            movie1.setAgelimit(AgeEnum.PG13);
+            movie1.setResume("The aliens are coming and\n" +
+                    "their goal is to invade and\n" +
+                    "destroy Earth. Fighting superior\n" +
+                    "technology, mankind's best\n" +
+                    "weapon is the will to survive.");
 
-            // Check if the movie exists, and if not, create and save it
-            if (!movieRepository.existsByMovieTitle("Independence day")) {
-                // Create a Movie instance
-                Movie movie1 = new Movie();
-                movie1.setMovieTitle("Independence day");
-                movie1.setRuntime(120);
-                movie1.setAgelimit(AgeEnum.PG13);
-                movie1.setResume("The aliens are coming and\n" +
-                        "their goal is to invade and\n" +
-                        "destroy Earth. Fighting superior\n" +
-                        "technology, mankind's best\n" +
-                        "weapon is the will to survive.");
+            // Set the theaters for movie1
+            movie1.setTheaters(Arrays.asList(theater1));
 
-                // Set the theaters for movie1
-                movie1.setTheaters(Arrays.asList(theater1));
+            // Create a Showing instance
+            Showing showing1 = new Showing();
+            showing1.setStartDate(LocalDate.of(2023, 10, 10));
+            showing1.setEndDate(LocalDate.of(2023, 10, 17));
+            showing1.setShowingDate(LocalDate.of(2023, 10, 12));
+            showing1.setShowingTime(LocalTime.of(18, 30));
 
+            // Set the relationships using JPA annotations
+            showing1.setMovie(movie1);
+            showing1.setTheater(theater1);
 
-                // Create a Showing instance
-                Showing showing1 = new Showing();
-                showing1.setStartDate(LocalDate.of(2023, 10, 10)); // October 10th
-                showing1.setEndDate(LocalDate.of(2023, 10, 17));   // October 17th
-                showing1.setShowingDate(LocalDate.of(2023, 10, 12)); // October 12th
-                showing1.setShowingTime(LocalTime.of(18, 30));
-
-                // Set the relationships using JPA annotations
-                showing1.setMovie(movie1); // This establishes the many-to-one relationship
-                showing1.setTheater(theater1); // This establishes the many-to-one relationship
-
-                // Save the entities
-                movieRepository.save(movie1);
-                showingRepository.save(showing1);
-                theaterRepository.save(theater1);
-            }
+            // Save the entities
+            movieRepository.save(movie1);
+            showingRepository.save(showing1);
         }
+
+// Create a Theater instance for "Halloween Ends"
+        Theater theater2 = new Theater();
+        theater2.setTheaterName("SmallBoi theater");
+        theater2.setSeatingCapacity(240);
+        theaterRepository.save(theater2);
+
+// Check if the movie exists, and if not, create and save it
+        if (!movieRepository.existsByMovieTitle("Halloween ends")) {
+            // Create a Movie instance for "Halloween Ends"
+            Movie movie2 = new Movie();
+            movie2.setMovieTitle("Halloween ends");
+            movie2.setRuntime(120);
+            movie2.setAgelimit(AgeEnum.PG13);
+            movie2.setResume("A different movie description for Halloween Ends.");
+
+            // Set the theaters for movie2
+            movie2.setTheaters(Arrays.asList(theater2));
+
+            // Create a Showing instance
+            Showing showing2 = new Showing();
+            showing2.setStartDate(LocalDate.of(2023, 10, 10));
+            showing2.setEndDate(LocalDate.of(2023, 11, 17));
+            showing2.setShowingDate(LocalDate.of(2023, 10, 15));
+            showing2.setShowingTime(LocalTime.of(20, 30));
+
+            // Set the relationships using JPA annotations
+            showing2.setMovie(movie2);
+            showing2.setTheater(theater2);
+
+            // Save the entities
+            movieRepository.save(movie2);
+            showingRepository.save(showing2);
+        }
+
     }
 }
 

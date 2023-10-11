@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking Information Lookup</title>
     <style>
+
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
@@ -57,6 +58,35 @@
         .suggestion:hover {
             background-color: #f4f4f4;
         }
+
+        /* Pop-up styles */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .popup-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -66,9 +96,17 @@
     <div class="suggestions" id="suggestions-container"></div>
 </div>
 
+<!-- Pop-up -->
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <span class="close" id="close-popup">&times;</span>
+        <h2>Booking Information</h2>
+        <div id="popup-content-data">
+            <!-- Booking information will be displayed here -->
+        </div>
+    </div>
+</div>
 
-
-<script src="../static/js/bookingJS.js"></script>
-
+<script src="/js/booking.js"></script>
 </body>
 </html>

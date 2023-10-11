@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Set;
 @Entity
 public class Movie {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int movieid;
