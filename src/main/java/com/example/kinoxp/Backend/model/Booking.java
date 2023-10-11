@@ -15,12 +15,30 @@ public class Booking {
     private int phoneNo;
     private String email;
     private int bookingNumber;
+    private int seatNumber;
+    private int row;
 
     @ManyToOne
     private Movie movie;
 
     @ManyToOne Theater theater;
     private LocalTime showingTime;
+
+    public int getSeatNumber() {
+        return seatNumber;
+    }
+
+    public void setSeatNumber(int seatNumber) {
+        this.seatNumber = seatNumber;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public void setRow(int row) {
+        this.row = row;
+    }
 
     public int getId() {
         return id;
