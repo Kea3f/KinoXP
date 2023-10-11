@@ -50,6 +50,8 @@ public class MovieRESTController {
         return new ResponseEntity<>(movieDto, HttpStatus.OK);
     }
 
+
+
     @GetMapping("/events")
     public ResponseEntity<List<CalendarDto>> getCalendarEvents() {
         List<Showing> movieShowings = showingRepository.findAll();
