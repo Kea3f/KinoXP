@@ -33,6 +33,7 @@ public class Movie {
     @JoinColumn(name = "theaterid") // Define the foreign key column
     private Theater theater; // Represents the relationship to Theater
 
+
     public void setTheaters(List<Theater> theaters) {
         this.theaters = theaters;
     }

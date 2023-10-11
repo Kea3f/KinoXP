@@ -76,36 +76,6 @@
     </style>
 </head>
 <body>
-<div class="menu-bar-container">
-    <iframe src="menuBar.html" class="menu-bar-iframe" frameborder="0"></iframe>
-</div>
-
-<h1>Employee List</h1>
-<table>
-    <tr>
-        <th>Name</th>
-        <th>Phone Number</th>
-        <th>Email</th>
-        <th>Edit</th>
-        <th>Delete</th>
-    </tr>
-    <tr th:each="employee : ${employees}">
-        <td th:text="${employee.firstName} + ' ' + ${employee.lastName}"></td>
-        <td th:text="${employee.phoneNumber}"></td>
-        <td th:text="${employee.email}"></td>
-
-        <td>
-            <button class="icon-button">
-                <i class="fas fa-pencil-alt"></i>
-            </button>
-        </td>
-        <td>
-            <button class="icon-button">
-                <i class="fas fa-trash-alt"></i>
-            </button>
-        </td>
-    </tr>
-</table>
 
 <script th:inline="javascript">
     // AJAX delete request
@@ -122,5 +92,42 @@
         });
     }
 </script>
+
+<div id="menu-bar-placeholder"></div>
+
+<h1>Employee List</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Phone Number</th>
+        <th>Email</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="employee : ${employees}">
+        <td th:text="${employee.employee_name}"></td>
+        <td th:text="${employee.employee_phoneNo}"></td>
+        <td th:text="${employee.employee_mail}"></td>
+
+
+        <td>
+            <button class="icon-button">
+                <i class="fas fa-pencil-alt"></i>
+            </button>
+        </td>
+        <td>
+            <button class="icon-button">
+                <i class="fas fa-trash-alt"></i>
+            </button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<script src="navbar.js"></script>
+
 </body>
 </html>
