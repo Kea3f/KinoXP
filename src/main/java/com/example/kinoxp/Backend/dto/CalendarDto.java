@@ -11,7 +11,6 @@ public class CalendarDto {
 
     private String title;
     private LocalDate showingDate;
-
     private LocalTime showingTime;
 
     public LocalTime getShowingTime() {

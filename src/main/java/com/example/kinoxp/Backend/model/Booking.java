@@ -1,28 +1,18 @@
 package com.example.kinoxp.Backend.model;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 @Entity
 public class Booking {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private int id;
     private String customerName;
     private int phoneNo;
     private String email;
     private int bookingNumber;
     private int seatNumber;
-    private int row;
-
-    @ManyToOne
-    private Movie movie;
-
-    @ManyToOne Theater theater;
-    private LocalTime showingTime;
+    private int aisle;
 
     public int getSeatNumber() {
         return seatNumber;
@@ -32,13 +22,15 @@ public class Booking {
         this.seatNumber = seatNumber;
     }
 
-    public int getRow() {
-        return row;
+    public int getAisle() {
+        return aisle;
     }
 
-    public void setRow(int row) {
-        this.row = row;
+    public void setAisle(int aisle) {
+        this.aisle = aisle;
     }
+
+
 
     public int getId() {
         return id;
@@ -80,27 +72,4 @@ public class Booking {
         this.bookingNumber = bookingNumber;
     }
 
-    public Movie getMovie() {
-        return movie;
-    }
-
-    public void setMovie(Movie movie) {
-        this.movie = movie;
-    }
-
-    public Theater getTheater() {
-        return theater;
-    }
-
-    public void setTheater(Theater theater) {
-        this.theater = theater;
-    }
-
-    public LocalTime getShowingTime() {
-        return showingTime;
-    }
-
-    public void setShowingTime(LocalTime showingTime) {
-        this.showingTime = showingTime;
-    }
 }
