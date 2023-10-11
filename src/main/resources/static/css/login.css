@@ -1,0 +1,63 @@
+/* style.css for login */
+body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.login-form {
+    flex: 1;
+    padding-right: 150px;
+}
+
+h1, h2 {
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+input[type="text"],
+input[type="password"] {
+    display: block;
+    width: 70%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+button[type="submit"] {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+button[type="submit"]:hover {
+    background-color: lightgrey;
+}
+
+/* Style for the image */
+.logo-img {
+    max-width: 50%; /* Adjust the max-width to your desired size */
+    height: auto;
+}
