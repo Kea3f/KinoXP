@@ -1,9 +1,12 @@
 package com.example.kinoxp.Backend.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Booking {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -14,23 +17,13 @@ public class Booking {
     private int seatNumber;
     private int aisle;
 
-    public int getSeatNumber() {
-        return seatNumber;
-    }
+    @ManyToOne
+    @JoinColumn(name = "theater_id")
+    private Theater theater;
 
-    public void setSeatNumber(int seatNumber) {
-        this.seatNumber = seatNumber;
-    }
-
-    public int getAisle() {
-        return aisle;
-    }
-
-    public void setAisle(int aisle) {
-        this.aisle = aisle;
-    }
-
-
+    @ManyToOne
+    @JoinColumn(name = "movie_id")
+    private Movie movie;
 
     public int getId() {
         return id;
@@ -72,4 +65,35 @@ public class Booking {
         this.bookingNumber = bookingNumber;
     }
 
+    public int getSeatNumber() {
+        return seatNumber;
+    }
+
+    public void setSeatNumber(int seatNumber) {
+        this.seatNumber = seatNumber;
+    }
+
+    public int getAisle() {
+        return aisle;
+    }
+
+    public void setAisle(int aisle) {
+        this.aisle = aisle;
+    }
+
+    public Theater getTheater() {
+        return theater;
+    }
+
+    public void setTheater(Theater theater) {
+        this.theater = theater;
+    }
+
+    public Movie getMovie() {
+        return movie;
+    }
+
+    public void setMovie(Movie movie) {
+        this.movie = movie;
+    }
 }
