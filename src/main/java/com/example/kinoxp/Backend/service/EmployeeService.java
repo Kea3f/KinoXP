@@ -1,3 +1,4 @@
+/*
 package com.example.kinoxp.Backend.service;
 
 
@@ -30,75 +31,47 @@ public class EmployeeService {
     }
 
 
-
-
-
-
-
-    public Optional<Employee> getEmployeeById(int employeeId) {
-        return employeeRepository.findById(employeeId);
+    public List<Employee> getAllEmployees() {
+        return employeeRepository.findAll();
     }
+
+    public Employee getEmployeeById(int employeeId) {
+        return employeeRepository.findByEmployeeId(employeeId);
+    }
+
+    public Employee getEmployeeByUsername(String username) {
+        return employeeRepository.findByUsername(username);
+    }
+
 
     public Employee createEmployee(Employee employee) {
         return employeeRepository.save(employee);
     }
 
-    public Optional<Employee> updateEmployee(int employeeId, Employee updatedEmployee) {
-        Optional<Employee> existingEmployee = employeeRepository.findById(employeeId);
-        if (existingEmployee.isPresent()) {
-            updatedEmployee.setEmployeeId(employeeId);
-            return Optional.of(employeeRepository.save(updatedEmployee));
-        } else {
-            return Optional.empty();
+
+    public Employee updateEmployee(int employeeId, Employee updatedEmployee) {
+        Employee existingEmployee = employeeRepository.findByEmployeeId(employeeId);
+
+        if (existingEmployee != null) {
+            existingEmployee.setEmployee_name(updatedEmployee.getEmployee_name());
+            existingEmployee.setEmployee_mail(updatedEmployee.getEmployee_mail());
+            existingEmployee.setEmployee_phoneNo(updatedEmployee.getEmployee_phoneNo());
+            // You can update other fields here
+
+            return employeeRepository.save(existingEmployee);
         }
+
+        return null; // Employee not found
     }
 
-
-    public Optional<Employee> findByEmployeeId(int employeeId) {
-        return employeeRepository.findById(employeeId);
-    }
-
-    public void deleteByEmployeeId(int employeeId) {
+    public void deleteEmployee(int employeeId) {
         employeeRepository.deleteById(employeeId);
     }
-
-
-//query custom m jpa
-
-
-
-    public boolean deleteEmployee(int employeeId) {
-        Optional<Employee> existingEmployee = employeeRepository.findById(employeeId);
-        if (existingEmployee.isPresent()) {
-            employeeRepository.deleteById(employeeId);
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
 
 
 }
+
+ */

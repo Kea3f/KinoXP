@@ -1,3 +1,4 @@
+/*
 package com.example.kinoxp.Backend.model;
 
 import javax.persistence.*;
@@ -65,9 +66,7 @@ public class Employee {
         this.employee_mail = employee_mail;
     }
 
-    /*
-    //many employees can be associated with many movies
-    @ManyToMany(mappedBy = "employees")
-    private List<MovieModel> movies;
-*/
-}
+  }
+ */
+
+

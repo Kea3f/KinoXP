@@ -1,3 +1,4 @@
+/*
 package com.example.kinoxp.Backend.configClass;
 
 import com.example.kinoxp.Backend.model.Employee;
@@ -62,3 +63,5 @@ public class EmployeeData implements CommandLineRunner {
     }
 
 }
+
+ */

@@ -1,3 +1,4 @@
+/*
 package com.example.kinoxp.Backend.controller;
 
 import com.example.kinoxp.Backend.dto.LoginDto;
@@ -43,60 +44,44 @@ public class EmployeeRestController {
     }
 
 
-    /*
-
-
-    @GetMapping("/employees") //Retrieve a list of all employees
+    @GetMapping
     public List<Employee> getAllEmployees() {
         return employeeService.getAllEmployees();
     }
-    */
 
-    @GetMapping("/employee/{employeeId}") // Retrieve an employee by their ID.
+    @GetMapping("/{employeeId}")
     public ResponseEntity<Employee> getEmployeeById(@PathVariable int employeeId) {
-        Optional<Employee> employee = employeeService.getEmployeeById(employeeId);
-
-        return employee.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+        Employee employee = employeeService.getEmployeeById(employeeId);
+        if (employee != null) {
+            return ResponseEntity.ok(employee);
+        }
+        return ResponseEntity.notFound().build();
     }
 
-    @PostMapping("/employee") //Create a new employee.
+    @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
     public Employee createEmployee(@RequestBody Employee employee) {
         return employeeService.createEmployee(employee);
     }
 
-    @PutMapping("/employee/{employeeId}") //Update an existing employee by their ID.
+    @PutMapping("/{employeeId}")
     public ResponseEntity<Employee> updateEmployee(@PathVariable int employeeId, @RequestBody Employee updatedEmployee) {
-        Optional<Employee> employee = employeeService.updateEmployee(employeeId, updatedEmployee);
-        return employee.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
-    @DeleteMapping("/employee/{employeeId}") //Delete an employee by their ID.
-    public ResponseEntity<String> deleteEmployee(@PathVariable int employeeId) {
-        if (employeeService.deleteEmployee(employeeId)) {
-            return ResponseEntity.ok("Employee deleted");
-        } else {
-            return ResponseEntity.notFound().build();
+        Employee employee = employeeService.updateEmployee(employeeId, updatedEmployee);
+        if (employee != null) {
+            return ResponseEntity.ok(employee);
         }
+        return ResponseEntity.notFound().build();
     }
 
-/*
-
-    @DeleteMapping("/employee/{employeeId}")
+    @DeleteMapping("/{employeeId}")
     public ResponseEntity<String> deleteEmployee(@PathVariable int employeeId) {
-        Optional<Employee> orgStudent = EmployeeService.findByEmployeeId(employeeId);
-        if (orgStudent.isPresent()) {
-            EmployeeService.deleteByEmployeeId(employeeId);
-            return ResponseEntity.ok("Employee deleted");
-        } else {
-            //return ResponseEntity.notFound().build();
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Student not found");
-        }
+        employeeService.deleteEmployee(employeeId);
+        return ResponseEntity.ok("Employee deleted");
     }
 
- */
+
+
+
 
 
 
@@ -106,3 +91,5 @@ public class EmployeeRestController {
 
 
 }
+
+ */

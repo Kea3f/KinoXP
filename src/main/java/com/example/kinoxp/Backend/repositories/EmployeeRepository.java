@@ -1,3 +1,4 @@
+/*
 package com.example.kinoxp.Backend.repositories;
 
 import com.example.kinoxp.Backend.model.Employee;
@@ -14,7 +15,6 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
     Employee findByEmployeeId(int employeeId);
 
-    //Employee findEmployeeByEmployeeId(int employeeId);
+   }
 
-    //List<Employee> findAllEmployee_name(String employee_name); //All employees
-}
+ */
