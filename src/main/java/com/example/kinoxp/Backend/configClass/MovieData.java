@@ -10,6 +10,7 @@ import com.example.kinoxp.Backend.repositories.ShowingRepository;
 import com.example.kinoxp.Backend.repositories.TheaterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -18,6 +19,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 @Component
+@Order(1)
 public class MovieData implements CommandLineRunner {
 
     @Autowired
@@ -41,6 +43,7 @@ public class MovieData implements CommandLineRunner {
         if (!movieRepository.existsByMovieTitle("Independence day")) {
             // Create a Movie instance for "Independence Day"
             Movie movie1 = new Movie();
+            movie1.setMovieid(1);
             movie1.setMovieTitle("Independence day");
             movie1.setRuntime(120);
             movie1.setAgelimit(AgeEnum.PG13);
@@ -50,6 +53,7 @@ public class MovieData implements CommandLineRunner {
                     "technology, mankind's best\n" +
                     "weapon is the will to survive.");
 
+            movieRepository.save(movie1);
             // Set the theaters for movie1
             movie1.setTheaters(Arrays.asList(theater1));
 
@@ -79,11 +83,13 @@ public class MovieData implements CommandLineRunner {
         if (!movieRepository.existsByMovieTitle("Halloween ends")) {
             // Create a Movie instance for "Halloween Ends"
             Movie movie2 = new Movie();
+            movie2.setMovieid(2);
             movie2.setMovieTitle("Halloween ends");
             movie2.setRuntime(120);
             movie2.setAgelimit(AgeEnum.PG13);
             movie2.setResume("A different movie description for Halloween Ends.");
 
+            movieRepository.save(movie2);
             // Set the theaters for movie2
             movie2.setTheaters(Arrays.asList(theater2));
 

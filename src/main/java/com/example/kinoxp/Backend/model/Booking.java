@@ -1,7 +1,7 @@
 package com.example.kinoxp.Backend.model;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Optional;
 
 @Entity
 public class Booking {
@@ -18,11 +18,6 @@ public class Booking {
     private int aisle;
 
     @ManyToOne
-    @JoinColumn(name = "theater_id")
-    private Theater theater;
-
-    @ManyToOne
-    @JoinColumn(name = "movie_id")
     private Movie movie;
 
     public int getId() {
@@ -79,14 +74,6 @@ public class Booking {
 
     public void setAisle(int aisle) {
         this.aisle = aisle;
-    }
-
-    public Theater getTheater() {
-        return theater;
-    }
-
-    public void setTheater(Theater theater) {
-        this.theater = theater;
     }
 
     public Movie getMovie() {

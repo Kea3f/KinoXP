@@ -15,4 +15,5 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
 
     boolean existsByMovieTitle(String s);
 
+
 }

@@ -4,7 +4,6 @@ import com.example.kinoxp.Backend.enums.AgeEnum;
 import com.example.kinoxp.Backend.enums.GenreEnum;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 @Entity
@@ -32,6 +31,9 @@ public class Movie {
     @ManyToOne
     @JoinColumn(name = "theaterid") // Define the foreign key column
     private Theater theater; // Represents the relationship to Theater
+
+    @OneToMany(mappedBy = "movie")
+    private List<Booking> bookings;
 
 
     public void setTheaters(List<Theater> theaters) {
@@ -82,9 +84,6 @@ public class Movie {
         return genres;
     }
 
-    public void setGenres(Set<GenreEnum> genres) {
-        this.genres = genres;
-    }
 
     public void setTheater(Theater theater) {
     }
