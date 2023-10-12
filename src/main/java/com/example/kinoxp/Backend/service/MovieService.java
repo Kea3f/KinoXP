@@ -32,6 +32,7 @@ public class MovieService {
         movieDto.setRuntime(movie.getRuntime());
         movieDto.setAgeLimit(movie.getAgelimit());
         movieDto.setResume(movie.getResume());
+        movieDto.setMovieid(movie.getMovieid());
         return movieDto;
     }
 

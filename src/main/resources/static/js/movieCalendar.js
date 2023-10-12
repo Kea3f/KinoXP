@@ -42,23 +42,25 @@ function displayMovieDetails(title) {
         const runtimeElement = $("<p>").text("Runtime: " + data.runtime + " minutes");
         const ageLimitElement = $("<p>").text("Age Limit: " + data.ageLimit);
         const resumeElement = $("<p>").text("Summary: " + data.resume);
+        const movieid = $("<p>").text("MovieId" + data.movieid);
 
         // Create the "Book" button
         const bookingButton = $('<button class="btn btn-primary">Book</button>');
-        bookingButton.data("movieId", data.id);
+        bookingButton.data("movieid", data.movieid);
 
         // Handle the click event of the "Book" button
-        bookingButton.click(function () {
-            const movieId = $(this).data("movieId");
+            bookingButton.click(function () {
+            const movieid = $(this).data("movieid");
 
             // Close the movie details modal
             $('#movieDetailsModal').modal('hide');
 
+
             // Open the booking modal
-            openBookingModal(); // Assuming openBookingModal handles the modal opening
+            openBookingModal(movieid);
         });
 
-        modalContent.append(titleElement, runtimeElement, ageLimitElement, resumeElement, bookingButton);
+        modalContent.append(titleElement, runtimeElement, ageLimitElement, resumeElement, movieid, bookingButton);
 
         $('#movieDetailsModal').modal('show');
     });
@@ -66,8 +68,10 @@ function displayMovieDetails(title) {
 
 
 // Define openBookingModal to handle the opening of the booking modal
-function openBookingModal() {
+function openBookingModal(movieid) {
     const bookingModal = document.getElementById('bookingModal');
+    const movieidInput = document.getElementById('movieidInput');
+    movieidInput.value = movieid; // Set the movieid in the input field
     bookingModal.style.display = 'block';
 }
 
