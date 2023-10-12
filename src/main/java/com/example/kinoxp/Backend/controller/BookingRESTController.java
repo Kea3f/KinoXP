@@ -6,12 +6,10 @@ import com.example.kinoxp.Backend.repositories.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -20,6 +18,13 @@ public class BookingRESTController {
 
     @Autowired
     private BookingRepository bookingRepository;
+    @Autowired
+    private final MovieRESTController movieRESTController;
+
+    public BookingRESTController(MovieRESTController movieRESTController, BookingRepository bookingRepository) {
+        this.movieRESTController = movieRESTController;
+        this.bookingRepository = bookingRepository;
+    }
 
     @GetMapping("/findByPhoneNo")
     public ResponseEntity<Map<String, Object>> findBookingByPhoneNo(@RequestParam("phoneNo") int phoneNo) {
@@ -50,4 +55,12 @@ public class BookingRESTController {
         }
     }
 
+
+    @PostMapping
+    public ResponseEntity<Booking> createBooking(@RequestBody Booking newBooking) {
+        // Save the new booking
+        Booking savedBooking = bookingRepository.save(newBooking);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedBooking);
+    }
 }
