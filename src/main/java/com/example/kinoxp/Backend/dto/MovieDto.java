@@ -9,6 +9,7 @@ import java.util.Set;
 
 public class MovieDto {
     private String title;
+    private int movieid;
     private int runtime;
     private AgeEnum ageLimit;
     private String resume;
@@ -24,6 +25,8 @@ public class MovieDto {
     public void setShowingDate(LocalDate showingDate) {
         this.showingDate = showingDate;
     }
+
+
 
     public String getTitle() {
         return title;
@@ -71,5 +74,13 @@ public class MovieDto {
 
     public void setTheater(Theater theater) {
         this.theater = theater;
+    }
+
+    public int getMovieid() {
+        return movieid;
+    }
+
+    public void setMovieid(int movieid) {
+        this.movieid = movieid;
     }
 }

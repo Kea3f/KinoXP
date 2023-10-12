@@ -56,9 +56,12 @@ public class BookingRESTController {
     }
     @PostMapping("/createbooking")
     public ResponseEntity<Booking> createBookingFromForm(@RequestParam("customerName") String customerName,
-                                                         @RequestParam("phoneNo") int phoneNo, @RequestParam("email") String email,
+                                                         @RequestParam("phoneNo") int phoneNo,
+                                                         @RequestParam("email") String email,
                                                          @RequestParam("bookingNumber") int bookingNumber,
-                                                         @RequestParam("seatNumber") int seatNumber, @RequestParam("aisle") int aisle) {
+                                                         @RequestParam("seatNumber") int seatNumber,
+                                                         @RequestParam("aisle") int aisle,
+                                                         @RequestParam("movieid") int movieid) {
 
         Booking newBooking = new Booking();
         newBooking.setCustomerName(customerName);
@@ -67,9 +70,11 @@ public class BookingRESTController {
         newBooking.setBookingNumber(bookingNumber);
         newBooking.setSeatNumber(seatNumber);
         newBooking.setAisle(aisle);
+        newBooking.setMovieid(movieid); // Set the movieid
 
         Booking savedBooking = bookingRepository.save(newBooking);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(savedBooking);
     }
+
 }
