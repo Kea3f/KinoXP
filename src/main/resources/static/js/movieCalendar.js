@@ -64,18 +64,22 @@ function displayMovieDetails(title) {
         const runtimeElement = $("<p>").text("Runtime: " + data.runtime + " minutes");
         const ageLimitElement = $("<p>").text("Age Limit: " + data.ageLimit);
         const resumeElement = $("<p>").text("Summary: " + data.resume);
-        const bookingButton = $("<button>").text("Booking");
-        // Append elements to the modal content
+        const bookingButton = $('<a id="bookingbutton" class="btn btn-primary">Book</a>');
+        bookingButton.attr('href', 'createBooking.html');
+        bookingButton.click(function() {
+            // Handle the link redirection or any other action here
+            window.location.href = bookingButton.attr('href');
+        });
+
+// Append the button to the modal content
         modalContent.append(titleElement, runtimeElement, ageLimitElement, resumeElement, bookingButton);
 
-        // Show the modal
+// Show the modal
         $('#movieDetailsModal').modal('show');
+
     });
 }
-//redirecting to booking
-function BookingButton() {
-    window.location.href ="createbooking.html"
-}
+
 
 // Wait for the DOM to be ready
 document.addEventListener('DOMContentLoaded', function () {
