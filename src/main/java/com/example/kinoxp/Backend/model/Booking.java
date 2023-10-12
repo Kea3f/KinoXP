@@ -5,8 +5,6 @@ import java.util.Optional;
 
 @Entity
 public class Booking {
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

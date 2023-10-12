@@ -1,25 +1,3 @@
-// Function to create a date-specific popup
-function createMoviePopup(selectedEvent) {
-    // Create a div element for displaying movie info (date-specific popup)
-    var popup = document.createElement("div");
-    popup.className = "movie-popup";
-
-    // Create a paragraph element for displaying movie information
-    var movieInfo = document.createElement("p");
-
-    // Display the movie information in the movieInfo paragraph
-    if (selectedEvent) {
-        movieInfo.textContent = selectedEvent.title + " at " + selectedEvent.showingTime;
-    } else {
-        movieInfo.textContent = "No movie available for this date.";
-    }
-
-    // Append the movieInfo to the popup
-    popup.appendChild(movieInfo);
-
-    return popup;
-}
-
 $(document).ready(function () {
     const searchInput = $("#search-input");
 
@@ -64,21 +42,63 @@ function displayMovieDetails(title) {
         const runtimeElement = $("<p>").text("Runtime: " + data.runtime + " minutes");
         const ageLimitElement = $("<p>").text("Age Limit: " + data.ageLimit);
         const resumeElement = $("<p>").text("Summary: " + data.resume);
-        const bookingButton = $('<a id="bookingbutton" class="btn btn-primary">Book</a>');
-        bookingButton.attr('href', 'createBooking.html');
-        bookingButton.click(function() {
-            // Handle the link redirection or any other action here
-            window.location.href = bookingButton.attr('href');
+        const bookingButton = $('<button class="btn btn-primary">Book</button');
+        bookingButton.data("movieId", data.id);
+
+        // Handle the click event of the "Book" button
+        bookingButton.click(function () {
+            const movieId = $(this).data("movieId");
+
+            // Close the movie details modal
+            $('#movieDetailsModal').modal('hide');
+
+            // Open the booking modal
+            openBookingModal(); // Assuming openBookingModal handles the modal opening
         });
 
-// Append the button to the modal content
         modalContent.append(titleElement, runtimeElement, ageLimitElement, resumeElement, bookingButton);
 
-// Show the modal
         $('#movieDetailsModal').modal('show');
-
     });
 }
+
+// Define openBookingModal to handle the opening of the booking modal
+function openBookingModal() {
+    const bookingModal = document.getElementById('bookingModal');
+    bookingModal.style.display = 'block';
+}
+
+const bookingForm = document.getElementById('bookingForm');
+
+bookingForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    // Get the form data
+    const formData = new FormData(bookingForm);
+
+    // Create an object from the form data
+    const bookingData = {};
+    formData.forEach((value, key) => {
+        bookingData[key] = value;
+    });
+
+    // Send a POST request to the server
+    fetch('/bookings/createbooking', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: new URLSearchParams(bookingData)
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Booking created:', data);
+            // You can close the modal or handle the response as needed
+        })
+        .catch(error => {
+            console.error('Error creating booking:', error);
+        });
+});
 
 
 // Wait for the DOM to be ready
