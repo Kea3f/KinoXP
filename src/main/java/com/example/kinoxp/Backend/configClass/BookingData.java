@@ -15,7 +15,6 @@ public class BookingData implements CommandLineRunner {
 
     @Autowired
     BookingRepository bookingRepository;
-
     @Autowired
     MovieRepository movieRepository;
 
