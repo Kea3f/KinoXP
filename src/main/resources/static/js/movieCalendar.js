@@ -42,7 +42,9 @@ function displayMovieDetails(title) {
         const runtimeElement = $("<p>").text("Runtime: " + data.runtime + " minutes");
         const ageLimitElement = $("<p>").text("Age Limit: " + data.ageLimit);
         const resumeElement = $("<p>").text("Summary: " + data.resume);
-        const bookingButton = $('<button class="btn btn-primary">Book</button');
+
+        // Create the "Book" button correctly
+        const bookingButton = $('<button class="btn btn-primary">Book</button>');
         bookingButton.data("movieId", data.id);
 
         // Handle the click event of the "Book" button
@@ -61,6 +63,7 @@ function displayMovieDetails(title) {
         $('#movieDetailsModal').modal('show');
     });
 }
+
 
 // Define openBookingModal to handle the opening of the booking modal
 function openBookingModal() {
