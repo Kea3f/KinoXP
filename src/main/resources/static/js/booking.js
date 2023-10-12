@@ -48,19 +48,20 @@ document.addEventListener("DOMContentLoaded", function () {
             .then(response => response.json())
             .then(data => {
                 if (data.id) { // Assuming that 'id' is present in the response when a booking is found
-                    const bookingData = `Customer Name: ${data.customerName}<br>
+                    const bookingData = ` Booking Number: ${data.bookingNumber}<br>
+                                        <br>
+                                        Customer Name: ${data.customerName}<br>
                                         <br>
                                          Email: ${data.email}<br>
                                          <br>
                                          Phone Number: ${data.phoneNo}<br>
                                          <br>
-                                         Aisle Number: ${data.aisle}<br>
+                                         Movie Title: ${data.movieTitle}<br>                                                                       
                                          <br>
-                                         Seat Number: ${data.seatNumber}<br>
+                                          Seat Number: ${data.seatNumber}<br>
                                          <br>
-                                         Booking Number: ${data.bookingNumber}<br>
-                                         <br>
-                                         Movie Title: ${data.movieTitle}<br>`;
+                                         Aisle Number: ${data.aisle}<br>`;
+
                     showPopup(bookingData);
                 } else {
                     hidePopup();
