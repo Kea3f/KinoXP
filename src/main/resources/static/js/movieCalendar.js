@@ -1,25 +1,3 @@
-// Function to create a date-specific popup
-function createMoviePopup(selectedEvent) {
-    // Create a div element for displaying movie info (date-specific popup)
-    var popup = document.createElement("div");
-    popup.className = "movie-popup";
-
-    // Create a paragraph element for displaying movie information
-    var movieInfo = document.createElement("p");
-
-    // Display the movie information in the movieInfo paragraph
-    if (selectedEvent) {
-        movieInfo.textContent = selectedEvent.title + " at " + selectedEvent.showingTime;
-    } else {
-        movieInfo.textContent = "No movie available for this date.";
-    }
-
-    // Append the movieInfo to the popup
-    popup.appendChild(movieInfo);
-
-    return popup;
-}
-
 $(document).ready(function () {
     const searchInput = $("#search-input");
 
