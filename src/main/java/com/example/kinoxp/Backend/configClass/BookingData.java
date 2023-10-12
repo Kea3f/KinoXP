@@ -64,7 +64,7 @@ public class BookingData implements CommandLineRunner {
             booking4.setBookingNumber(44);
             booking4.setSeatNumber(8);
             booking4.setAisle(2);
-            booking3.setMovie(movieRepository.getById(1));
+            booking4.setMovie(movieRepository.getById(3));
             bookingRepository.save(booking4);
 
             Booking booking5 = new Booking();
@@ -75,7 +75,7 @@ public class BookingData implements CommandLineRunner {
             booking5.setBookingNumber(32);
             booking5.setSeatNumber(1);
             booking5.setAisle(1);
-            booking3.setMovie(movieRepository.getById(2));
+            booking5.setMovie(movieRepository.getById(2));
 
             bookingRepository.save(booking5);
 
@@ -87,7 +87,7 @@ public class BookingData implements CommandLineRunner {
             booking6.setBookingNumber(36);
             booking6.setSeatNumber(2);
             booking6.setAisle(12);
-            booking3.setMovie(movieRepository.getById(2));
+            booking6.setMovie(movieRepository.getById(2));
 
             bookingRepository.save(booking6);
 

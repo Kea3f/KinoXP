@@ -18,6 +18,7 @@ import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+
 @Component
 @Order(1)
 public class MovieData implements CommandLineRunner {
@@ -79,7 +80,7 @@ public class MovieData implements CommandLineRunner {
         theater2.setSeatingCapacity(240);
         theaterRepository.save(theater2);
 
-// Check if the movie exists, and if not, create and save it
+        // Check if the movie exists, and if not, create and save it
         if (!movieRepository.existsByMovieTitle("Halloween ends")) {
             // Create a Movie instance for "Halloween Ends"
             Movie movie2 = new Movie();
@@ -106,6 +107,35 @@ public class MovieData implements CommandLineRunner {
 
             // Save the entities
             movieRepository.save(movie2);
+            showingRepository.save(showing2);
+        }
+        // Check if the movie exists, and if not, create and save it
+        if (!movieRepository.existsByMovieTitle("Oppenheimer")) {
+            // Create a Movie instance for "Halloween Ends"
+            Movie movie3 = new Movie();
+            movie3.setMovieid(3);
+            movie3.setMovieTitle("Oppenheimer");
+            movie3.setRuntime(180);
+            movie3.setAgelimit(AgeEnum.PG13);
+            movie3.setResume("Stuff about the Manhattan project");
+
+            movieRepository.save(movie3);
+            // Set the theaters for movie2
+            movie3.setTheaters(Arrays.asList(theater2));
+
+            // Create a Showing instance
+            Showing showing2 = new Showing();
+            showing2.setStartDate(LocalDate.of(2023, 10, 10));
+            showing2.setEndDate(LocalDate.of(2023, 11, 17));
+            showing2.setShowingDate(LocalDate.of(2023, 10, 18));
+            showing2.setShowingTime(LocalTime.of(20, 30));
+
+            // Set the relationships using JPA annotations
+            showing2.setMovie(movie3);
+            showing2.setTheater(theater2);
+
+            // Save the entities
+            movieRepository.save(movie3);
             showingRepository.save(showing2);
         }
 

@@ -2,7 +2,6 @@ package com.example.kinoxp.Backend.model;
 
 import com.example.kinoxp.Backend.enums.AgeEnum;
 import com.example.kinoxp.Backend.enums.GenreEnum;
-
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;

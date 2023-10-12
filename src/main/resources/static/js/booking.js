@@ -49,11 +49,18 @@ document.addEventListener("DOMContentLoaded", function () {
             .then(data => {
                 if (data.id) { // Assuming that 'id' is present in the response when a booking is found
                     const bookingData = `Customer Name: ${data.customerName}<br>
+                                        <br>
                                          Email: ${data.email}<br>
+                                         <br>
                                          Phone Number: ${data.phoneNo}<br>
+                                         <br>
                                          Aisle Number: ${data.aisle}<br>
+                                         <br>
                                          Seat Number: ${data.seatNumber}<br>
-                                         Booking Number: ${data.bookingNumber}<br>`;
+                                         <br>
+                                         Booking Number: ${data.bookingNumber}<br>
+                                         <br>
+                                         Movie Title: ${data.movieTitle}<br>`;
                     showPopup(bookingData);
                 } else {
                     hidePopup();
