@@ -64,17 +64,63 @@ function displayMovieDetails(title) {
         const runtimeElement = $("<p>").text("Runtime: " + data.runtime + " minutes");
         const ageLimitElement = $("<p>").text("Age Limit: " + data.ageLimit);
         const resumeElement = $("<p>").text("Summary: " + data.resume);
-        const bookingButton = $('<button class="btn btn-primary">Book</button>');
+        const bookingButton = $('<button class="btn btn-primary">Book</button');
+        bookingButton.data("movieId", data.id);
 
+        // Handle the click event of the "Book" button
         bookingButton.click(function () {
-            window.location.href = "/createBooking";
+            const movieId = $(this).data("movieId");
+
+            // Close the movie details modal
+            $('#movieDetailsModal').modal('hide');
+
+            // Open the booking modal
+            openBookingModal(); // Assuming openBookingModal handles the modal opening
         });
 
         modalContent.append(titleElement, runtimeElement, ageLimitElement, resumeElement, bookingButton);
 
         $('#movieDetailsModal').modal('show');
-        });
+    });
 }
+
+// Define openBookingModal to handle the opening of the booking modal
+function openBookingModal() {
+    const bookingModal = document.getElementById('bookingModal');
+    bookingModal.style.display = 'block';
+}
+
+const bookingForm = document.getElementById('bookingForm');
+
+bookingForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    // Get the form data
+    const formData = new FormData(bookingForm);
+
+    // Create an object from the form data
+    const bookingData = {};
+    formData.forEach((value, key) => {
+        bookingData[key] = value;
+    });
+
+    // Send a POST request to the server
+    fetch('/bookings/createbooking', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: new URLSearchParams(bookingData)
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Booking created:', data);
+            // You can close the modal or handle the response as needed
+        })
+        .catch(error => {
+            console.error('Error creating booking:', error);
+        });
+});
 
 
 // Wait for the DOM to be ready
