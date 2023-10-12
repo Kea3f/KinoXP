@@ -43,7 +43,7 @@ function displayMovieDetails(title) {
         const ageLimitElement = $("<p>").text("Age Limit: " + data.ageLimit);
         const resumeElement = $("<p>").text("Summary: " + data.resume);
 
-        // Create the "Book" button correctly
+        // Create the "Book" button
         const bookingButton = $('<button class="btn btn-primary">Book</button>');
         bookingButton.data("movieId", data.id);
 
