@@ -11,7 +11,7 @@ public class BookingController {
         return "BookingInformationLookup";
     }
 
-    @GetMapping("/createbooking")
+    @GetMapping("/createBooking")
     public String createBooking (){
         return "createBooking";
     }
