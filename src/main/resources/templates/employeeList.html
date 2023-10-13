@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <style>
+        h1 {
+            color: black;
+            margin-left: 95px;
+        }
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .icon-cell i {
+            color: #000000;
+            cursor: pointer;
+        }
+
+
+        .icon-button i {
+            color: #000000;
+            font-size: 16px; /* Adjust the font size as needed */
+        }
+
+        /* Optional: Add some spacing between the buttons */
+        .icon-button + .icon-button {
+            margin-left: 10px;
+        }
+
+        /* Style for icon buttons */
+        .icon-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px 10px; /* Adjust the padding as needed */
+            border-radius: 5px; /* Add rounded corners */
+        }
+
+        .icon-button i {
+            color: #000000;
+            font-size: 16px;
+        }
+
+        /* Center the buttons */
+        .button-container {
+            text-align: center;
+        }
+
+        /* Style for the delete popup container */
+        .delete-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+            z-index: 1000;
+        }
+
+        /* Style for the delete confirmation message */
+        .confirmation-message {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+
+    </style>
+
+</head>
+<body>
+<h1>Employee List</h1>
+<div class="button-container">
+<table>
+    <tbody>
+    <div id="employee-table-container"></div>
+
+
+    <div class="button-container">
+        <button class="icon-button" id="create-button" onclick="redirectToCreatePage()">
+            <i class="fas fa-plus"></i> Create
+        </button>
+        <button class="icon-button" id="edit-button" onclick="redirectToEditPage()">
+            <i class="fas fa-pencil-alt"></i> Edit
+        </button>
+        <button class="icon-button" id="delete-button" onclick="redirectToDeletePage()">
+            <i class="fas fa-trash"></i> Delete
+        </button>
+
+    </div>
+
+    </tbody>
+</table>
+
+    <!-- Delete Popup Container -->
+    <div class="delete-popup" id="delete-popup">
+        <h2>Choose which employee to delete</h2>
+        <ul id="employee-list">
+            <!-- Employee list items will be added here dynamically -->
+        </ul>
+        <button id="delete-confirm-button">Delete</button>
+        <div class="confirmation-message" id="delete-confirmation-message"></div>
+    </div>
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+        function fetchEmployeeData() {
+            const url = '/api/employees/employeeList'; // Spring Boot API endpoint
+
+            fetch(url)
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Failed to fetch data');
+                    }
+                })
+                .then(data => {
+                    const employeeInfo = data.map(employee => ({
+                        name: employee.employee_name,
+                        phoneNo: employee.employee_phoneNo,
+                        mail: employee.employee_mail,
+                    }));
+
+                    displayEmployeeInfo(employeeInfo);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        function displayEmployeeInfo(employeeInfo) {
+            const table = document.createElement('table');
+            const headerRow = table.insertRow(0);
+            headerRow.insertCell(0).textContent = 'Name';
+            headerRow.insertCell(1).textContent = 'Phone Number';
+            headerRow.insertCell(2).textContent = 'Email';
+
+
+            employeeInfo.forEach((employee, index) => {
+                const row = table.insertRow(index + 1);
+                row.insertCell(0).textContent = employee.name;
+                row.insertCell(1).textContent = employee.phoneNo;
+                row.insertCell(2).textContent = employee.mail;
+            });
+
+            const tableContainer = document.getElementById('employee-table-container');
+            tableContainer.innerHTML = '';
+            tableContainer.appendChild(table);
+        }
+
+        // Call the fetchEmployeeData function when your page loads
+        fetchEmployeeData();
+    });
+
+
+    // Function to navigate to the "creationOfEmployee" page
+    function redirectToCreatePage() {
+        window.location.href = 'createEmployee';
+    }
+
+    // Function to navigate to the "editEmployee" page
+    function redirectToEditPage() {
+        window.location.href = 'editEmployee';
+    }
+
+    // Function to navigate to the "editEmployee" page
+    function redirectToDeletePage() {
+        window.location.href = 'deleteEmployee';
+
+    }
+
+</script>
+
+</div>
+</body>
+</html>

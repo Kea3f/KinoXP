@@ -14,6 +14,43 @@ public class EmployeeController {
         return "login";
     }
 
+    @GetMapping("/homepage")
+    public String homepageDisplay(){
+        return "homepage";
+    }
+
+
+    @GetMapping("/employeeInfo{employeeId}")
+    public String employeeinfoDisplay(){
+        return "employeeInfo";
+    }
+
+    @GetMapping("/employeeList")
+    public String employeeListDisplay(){
+        return "employeeList";
+    }
+
+    @GetMapping("/menuBar")
+    public String getMenuBar() {
+        return "menuBar";
+    }
+
+
+    @GetMapping("/deleteEmployee")
+    public String deleteEmployee(){
+        return "deleteEmployee";
+    }
+
+    @GetMapping("/createEmployee")
+    public String createEmployee(){
+        return "createEmployee";
+    }
+
+    @GetMapping()
+    public String editEmployee(){
+        return "editEmpployee";
+    }
+
 
 
 

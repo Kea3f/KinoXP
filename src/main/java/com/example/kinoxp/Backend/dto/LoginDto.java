@@ -1,4 +1,4 @@
-/*
+
 package com.example.kinoxp.Backend.dto;
 
 
@@ -28,4 +28,3 @@ public class LoginDto {
     }
 }
 
- */

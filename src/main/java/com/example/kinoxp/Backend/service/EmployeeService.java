@@ -1,13 +1,10 @@
-/*
 package com.example.kinoxp.Backend.service;
-
-
 import com.example.kinoxp.Backend.model.Employee;
-
 import com.example.kinoxp.Backend.repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,7 +53,9 @@ public class EmployeeService {
             existingEmployee.setEmployee_name(updatedEmployee.getEmployee_name());
             existingEmployee.setEmployee_mail(updatedEmployee.getEmployee_mail());
             existingEmployee.setEmployee_phoneNo(updatedEmployee.getEmployee_phoneNo());
-            // You can update other fields here
+            existingEmployee.setUsername(updatedEmployee.getUsername());
+            existingEmployee.setPassword(updatedEmployee.getPassword());
+
 
             return employeeRepository.save(existingEmployee);
         }
@@ -68,10 +67,4 @@ public class EmployeeService {
         employeeRepository.deleteById(employeeId);
     }
 
-
-
-
-
 }
-
- */

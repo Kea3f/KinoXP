@@ -1,4 +1,4 @@
-/*
+
 package com.example.kinoxp.Backend.model;
 
 import javax.persistence.*;
@@ -67,6 +67,6 @@ public class Employee {
     }
 
   }
- */
+
 
 
