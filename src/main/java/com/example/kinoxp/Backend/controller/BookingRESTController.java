@@ -60,8 +60,9 @@ public class BookingRESTController {
                                                          @RequestParam("email") String email,
                                                          @RequestParam("bookingNumber") int bookingNumber,
                                                          @RequestParam("seatNumber") int seatNumber,
-                                                         @RequestParam("aisle") int aisle,
-                                                         @RequestParam("movieid") int movieid) {
+                                                         @RequestParam("aisle") int aisle)
+    {
+                                                       
 
         Booking newBooking = new Booking();
         newBooking.setCustomerName(customerName);
