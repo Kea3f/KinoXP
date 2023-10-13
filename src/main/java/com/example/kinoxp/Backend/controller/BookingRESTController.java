@@ -62,6 +62,7 @@ public class BookingRESTController {
                                                          @RequestParam("seatNumber") int seatNumber,
                                                          @RequestParam("aisle") int aisle)
     {
+                                                       
 
         Booking newBooking = new Booking();
         newBooking.setCustomerName(customerName);
@@ -70,6 +71,7 @@ public class BookingRESTController {
         newBooking.setBookingNumber(bookingNumber);
         newBooking.setSeatNumber(seatNumber);
         newBooking.setAisle(aisle);
+        newBooking.setMovieid(movieid); // Set the movieid
 
         Booking savedBooking = bookingRepository.save(newBooking);
 
