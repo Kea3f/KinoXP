@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login site - KinoXP</title>
   <style>
+
     body {
       font-family: Arial, sans-serif;
       background-color: white;
@@ -64,33 +65,79 @@
 
     /* Style for the image */
     .logo-img {
-      max-width: 50%; /* Adjust the max-width to your desired size */
+      max-width: 50%;
       height: auto;
     }
-
 
 
   </style>
 </head>
 <body>
 <div class="container">
+  <h1>KinoXP - </h1>
+  <h2> Corporate portal </h2>
   <div class="login-form">
-    <h1>KinoXP</h1>
-    <h2>Corporate portal</h2>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <form action="/login" method="post" onsubmit="return">
-      <input type="text" id="employeeId" name="employeeId" placeholder="Insert employee ID" required>
-      <input type="password" id="password" name="password" placeholder="Password" required>
-      <div id="error-message" style="color: red;" th:text="${error}"></div>
+    <h2>Login</h2>
+    <form id="login-form" method="post">
+      <input type="text" id="username" name="username" placeholder="Username" required><br>
+      <input type="password" id="password" name="password" placeholder="Password" required><br>
       <button type="submit">Login</button>
     </form>
-
-
+    <div id="message"></div>
   </div>
-  <img class="logo-img" src="../static/img/Logo.png" alt="KinoXP Logo">
+  <img class="logo-img" src="https://scontent-cph2-1.xx.fbcdn.net/v/t1.15752-9/380245756_293418173489143_3973782031829605329_n.png?_nc_cat=107&ccb=1-7&_nc_sid=8cd0a2&_nc_ohc=-KZ-jXJf58kAX9Bfh6f&_nc_ht=scontent-cph2-1.xx&oh=03_AdSkmwYwSv7yuHjijLEukgRpSPY6_BAGZPIdYvFtNCE0YQ&oe=654F1437" alt="KinoXP Logo">
 </div>
 
+<script>
+  // Ensure that the JavaScript code runs only after the HTML document has been fully loaded and parsed.
+  document.addEventListener("DOMContentLoaded", function () {
+    const loginForm = document.getElementById("login-form");
+    const usernameInput = document.getElementById("username"); // Assuming the input has the id "username"
+    const passwordInput = document.getElementById("password"); // Assuming the input has the id "password"
 
+    loginForm.addEventListener('submit', function (event) {
+      event.preventDefault(); // Prevent the default form submission
 
+      const username = usernameInput.value;
+      const password = passwordInput.value;
+      console.log(username);
+
+      if (username && password) {
+        fetch("http://localhost:2020/api/employees/login", {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            username: username,
+            password: password
+          })
+        })
+                .then(response => {
+                  if (response.ok) {
+                    return response.json();
+                  }
+                  throw new Error('Network response was not ok.');
+                })
+                .then(data => {
+                  if (data && data.username) { // Check for a valid user object
+                    window.sessionStorage.setItem('employee', JSON.stringify(data));
+                    window.location.href = 'homepage';
+                  } else {
+                    alert('Login failed. Please try again.');
+                  }
+                })
+                .catch(error => {
+                  console.error('Error:', error); // Log the specific error message
+                  alert('Login failed. Please try again.'); // Display a user-friendly message
+                });
+
+      } else {
+        alert('Please enter both username and password.');
+      }
+    });
+  });
+
+</script>
 </body>
 </html>

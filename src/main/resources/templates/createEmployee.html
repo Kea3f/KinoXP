@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Employee</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            margin: 0;
+        }
+
+        header {
+            text-align: left;
+            margin-left: 10%;
+            padding: 20px;
+            width: 100%;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            width: 100%;
+        }
+
+        .logo-container {
+            max-width: 50%;
+        }
+
+        .logo-img {
+            max-width: 100%;
+
+            margin-left: -15%;
+            height: auto;
+            padding: 20px;
+
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            width: 30%;
+            margin-top: 92px; /* Add margin to push the form down */
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"], input[type="email"], input[type="tel"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+
+        /* Restyled the button */
+        button {
+            width: 50%;
+            padding: 10px;
+            background-color: lightgrey;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+<!-- Container for the menu bar -->
+<div class="menu-bar-container"></div>
+
+<header>
+    <h1>Create Employee</h1>
+</header>
+
+<div class="container">
+    <div class="logo-container">
+        <img class="logo-img" src="https://scontent-cph2-1.xx.fbcdn.net/v/t1.15752-9/380245756_293418173489143_3973782031829605329_n.png?_nc_cat=107&ccb=1-7&_nc_sid=ae9488&_nc_ohc=ox4KmEnPdVIAX9E0sbP&_nc_ht=scontent-cph2-1.xx&oh=03_AdRYvCrfpF24ccezhgFtuRbbA690jChuEhSoqHhXvhGZvg&oe=654B57F7" alt="KinoXP Logo">
+    </div>
+    <form id="createEmployeeForm">
+        <input type="text" id="employeeName" name="employeeName" placeholder="Employee Name" required><br>
+        <input type="email" id="employeeEmail" name="employeeEmail" placeholder="Employee Email" required><br>
+        <input type="tel" id="employeePhone" name="employeePhone" placeholder="Phone Number" required><br>
+        <input type="text" id="employeeUsername" name="employeeUsername" placeholder="Username" required><br>
+        <input type="password" id="employeePassword" name="employeePassword" placeholder="Password" required><br>
+        <div class="button-container">
+            <button type="button" id="createEmployeeButton">Create Employee</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const createEmployeeForm = document.getElementById("createEmployeeForm");
+        const createEmployeeButton = document.getElementById("createEmployeeButton");
+
+        createEmployeeButton.addEventListener("click", function () {
+            const employeeName = document.getElementById("employeeName").value;
+            const employeeEmail = document.getElementById("employeeEmail").value;
+            const employeePhone = document.getElementById("employeePhone").value;
+            const employeeUsername = document.getElementById("employeeUsername").value;
+            const employeePassword = document.getElementById("employeePassword").value;
+
+            const newEmployee = {
+                employee_name: employeeName,
+                employee_mail: employeeEmail,
+                employee_phoneNo: employeePhone,
+                username: employeeUsername,
+                password: employeePassword
+                // Add other fields as needed
+            };
+
+            // Send the data to your backend for employee creation via an API call
+            fetch('http://localhost:2020/api/employees/create', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newEmployee),
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert("Employee created successfully.");
+                        createEmployeeForm.reset(); // Clear the form
+
+                        // Redirect to the homepage URL
+                        window.location.href = 'homepage';
+                    } else {
+                        alert("Error creating employee.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error creating employee:", error);
+                });
+        });
+    });
+
+
+    function loadMenuBar() {
+        const menuBarContainer = document.querySelector(".menu-bar-container");
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", "menuBar", true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                menuBarContainer.innerHTML = xhr.responseText;
+            }
+        };
+        xhr.send();
+    }
+    // Call the loadMenuBar function to insert the menu bar
+    loadMenuBar();
+
+</script>
+
+    </body>
+</html>

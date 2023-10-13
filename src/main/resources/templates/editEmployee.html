@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Edit Employee</title>
+</head>
+<body>
+<label for="employeeSelection">Select an Employee:</label>
+<select id="employeeSelection">
+  <!-- Employee options will be populated dynamically using JavaScript -->
+</select>
+
+<label for="inpEmployeeId">Employee ID:</label>
+<input type="text" id="inpEmployeeId" disabled><br>
+
+<label for="inpUsername">Username:</label>
+<input type="text" id="inpUsername"><br>
+
+<label for="inpPassword">Password:</label>
+<input type="text" id="inpPassword"><br>
+
+<label for="inpEmployeeName">Employee Name:</label>
+<input type="text" id="inpEmployeeName"><br>
+
+<label for="inpPhoneNo">Phone Number:</label>
+<input type="text" id="inpPhoneNo"><br>
+
+<label for="inpEmail">Email:</label>
+<input type text="text" id="inpEmail"><br>
+
+<button id="btnUpdateEmployee">Update Employee</button>
+
+<script>
+  console.log("Employee editing script");
+
+  const inpEmployeeId = document.getElementById("inpEmployeeId");
+  const inpUsername = document.getElementById("inpUsername");
+  const inpPassword = document.getElementById("inpPassword");
+  const inpEmployeeName = document.getElementById("inpEmployeeName");
+  const inpPhoneNo = document.getElementById("inpPhoneNo");
+  const inpEmail = document.getElementById("inpEmail");
+  const employeeSelection = document.getElementById("employeeSelection");
+
+  const employeeUrl = "http://localhost:2020/api/employees/editEmployee${employeeId}";
+
+  async function populateEmployeeList() {
+    // Fetch a list of employees from the server
+    const response = await fetch(`${employeeUrl}/employeeList`);
+    if (response.ok) {
+      const employees = await response.json();
+      // Populate the dropdown with employee names and store the ID as a data attribute
+      employees.forEach((employee) => {
+        const option = document.createElement("option");
+        option.value = employee.employeeId;
+        option.text = employee.employee_name;
+        option.dataset.employeeId = employee.employeeId;
+        employeeSelection.appendChild(option);
+      });
+    } else {
+      alert("Failed to fetch employee list");
+    }
+  }
+
+  populateEmployeeList();
+
+  employeeSelection.addEventListener("change", function() {
+    const selectedOption = employeeSelection.options[employeeSelection.selectedIndex];
+    const selectedEmployeeId = selectedOption.dataset.employeeId;
+    inpEmployeeId.value = selectedEmployeeId;
+    getEmployeeById(selectedEmployeeId);
+  });
+
+  async function getEmployeeById(employeeId) {
+    const getUrl = `${employeeUrl}?employeeId=${employeeId}`;
+    const response = await fetch(getUrl);
+    if (response.ok) {
+      const employee = await response.json();
+      inpUsername.value = employee.username;
+      inpPassword.value = employee.password;
+      inpEmployeeName.value = employee.employee_name;
+      inpPhoneNo.value = employee.employee_phoneNo;
+      inpEmail.value = employee.employee_mail;
+    } else {
+      alert("Failed to fetch employee data");
+    }
+  }
+
+  async function putEmployee() {
+    const employee = {
+      employeeId: parseInt(inpEmployeeId.value),
+      username: inpUsername.value,
+      password: inpPassword.value,
+      employee_name: inpEmployeeName.value,
+      employee_phoneNo: parseInt(inpPhoneNo.value),
+      employee_mail: inpEmail.value,
+    };
+    const putUrl = `${employeeUrl}?employeeId=${employee.employeeId}`;
+    const res = await postObjectAsJson(putUrl, employee, "PUT");
+    if (res.ok) {
+      alert("Employee updated");
+    } else {
+      alert("Failed to update employee");
+    }
+  }
+
+  async function postObjectAsJson(url, object, httpVerb) {
+    const objectAsJsonString = JSON.stringify(object);
+    const fetchOptions = {
+      method: httpVerb,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: objectAsJsonString,
+    };
+    const response = await fetch(url, fetchOptions);
+    return response;
+  }
+
+  document.getElementById("btnUpdateEmployee").addEventListener("click", putEmployee);
+</script>
+</body>
+</html>

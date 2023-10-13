@@ -1,24 +1,22 @@
+
 package com.example.kinoxp.Backend.dto;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
 
-@Entity
+
 public class LoginDto {
 
-    @Id
-    @Column(length = 2)
-    private int employee_number;
+
+
+    private String username;
     private String password;
 
-    public int getEmployee_number() {
-        return employee_number;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmployee_number(int employee_number) {
-        this.employee_number = employee_number;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -29,3 +27,4 @@ public class LoginDto {
         this.password = password;
     }
 }
+
