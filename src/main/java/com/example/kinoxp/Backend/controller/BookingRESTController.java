@@ -71,7 +71,6 @@ public class BookingRESTController {
         newBooking.setBookingNumber(bookingNumber);
         newBooking.setSeatNumber(seatNumber);
         newBooking.setAisle(aisle);
-        newBooking.setMovieid(movieid); // Set the movieid
 
         Booking savedBooking = bookingRepository.save(newBooking);
 
