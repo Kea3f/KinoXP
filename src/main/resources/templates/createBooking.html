@@ -5,6 +5,8 @@
     <title>Create a booking</title>
 </head>
 <body>
+<!-- Container for the menu bar -->
+<div class="menu-bar-container"></div>
 
 <h1>Create a New Booking</h1>
 <form id="bookingForm">
@@ -27,6 +29,27 @@
 </form>
 
 <div id="responseMessage"></div>
+
+<script>
+
+    // Function to load the navigation bar using the fetch API
+    function loadNavigationBar() {
+        console.log('Fetching navigation bar...');
+        fetch('navbar')
+            .then(response => response.text())
+            .then(data => {
+                console.log('Fetched navigation bar successfully.');
+                document.querySelector('.menu-bar-container').innerHTML = data;
+            })
+            .catch(error => {
+                console.error('Error loading navigation bar:', error);
+            });
+    }
+
+    // Call the loadNavigationBar function to insert the navigation bar
+    loadNavigationBar();
+
+</script>
 
 </body>
 </html>

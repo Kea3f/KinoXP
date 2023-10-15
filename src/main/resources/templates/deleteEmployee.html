@@ -49,6 +49,8 @@
 
 </head>
 <body>
+<!-- Container for the menu bar -->
+<div class="menu-bar-container"></div>
 
 <h1>Deleting Employee</h1>
 <ul id="employeeList">
@@ -126,6 +128,24 @@
               console.error("Error deleting employees:", error);
             });
   }
+
+  // Function to load the navigation bar using the fetch API
+  function loadNavigationBar() {
+    console.log('Fetching navigation bar...');
+    fetch('navbar')
+            .then(response => response.text())
+            .then(data => {
+              console.log('Fetched navigation bar successfully.');
+              document.querySelector('.menu-bar-container').innerHTML = data;
+            })
+            .catch(error => {
+              console.error('Error loading navigation bar:', error);
+            });
+  }
+
+  // Call the loadNavigationBar function to insert the navigation bar
+  loadNavigationBar();
+
 
 </script>
 </body>

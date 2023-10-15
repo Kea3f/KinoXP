@@ -14,8 +14,8 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
-@CrossOrigin // Jeg skal kunne tilgå min restcontroller gennem noget andet. I dette tilfælde javascript
-@RequestMapping("/api/employees")
+@CrossOrigin
+@RequestMapping("/api/employees") //In terms of url and code, it would be "easier" to do without employees
 public class EmployeeRestController {
 
     private final EmployeeService employeeService;
@@ -25,13 +25,8 @@ public class EmployeeRestController {
         this.employeeService = employeeService;
     }
 
-    @GetMapping("/test")
-    public String test(){
-        return "Test";
-    }
 
-
-
+    //Login
     @PostMapping("/login")
     public ResponseEntity<Employee> authenticateEmployee(@RequestBody LoginDto loginDto, HttpSession httpSession) {
         String username = loginDto.getUsername();
@@ -47,15 +42,15 @@ public class EmployeeRestController {
         }
     }
 
-
+    //viewing all employees
     @GetMapping("/employeeList")
     public List<Employee> getAllEmployees() {
         return employeeService.getAllEmployees();
     }
 
 
-
-    @GetMapping("/employeeInfo{employeeId}")
+    //Get specific employee information
+    @GetMapping("/employeeInfo/{employeeId}")
     public ResponseEntity<Employee> getEmployeeInfo(@PathVariable int employeeId) {
         Employee employee = employeeService.getEmployeeById(employeeId);
         if (employee != null) {
@@ -65,13 +60,16 @@ public class EmployeeRestController {
     }
 
 
+
+    //Create employee
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
     public Employee createEmployee(@RequestBody Employee employee) {
         return employeeService.createEmployee(employee);
     }
 
-    @PutMapping("/editEmployee{employeeId}")
+    //Edit employee
+    @PutMapping("/editEmployee/{employeeId}")
     public ResponseEntity<Employee> updateEmployee(@PathVariable int employeeId, @RequestBody Employee updatedEmployee) {
         Employee employee = employeeService.updateEmployee(employeeId, updatedEmployee);
         if (employee != null) {
@@ -80,6 +78,10 @@ public class EmployeeRestController {
         return ResponseEntity.notFound().build();
     }
 
+
+
+
+    //Delete employee
     @DeleteMapping("/deleteEmployee/{employeeId}")
     public ResponseEntity<String> deleteEmployee(@PathVariable int employeeId) {
         employeeService.deleteEmployee(employeeId);

@@ -70,6 +70,7 @@
             top: 0;
             left: 0;
         }
+
     </style>
 </head>
 <body>
@@ -86,6 +87,7 @@
     <img class="logo-img" src="https://scontent-cph2-1.xx.fbcdn.net/v/t1.15752-9/380245756_293418173489143_3973782031829605329_n.png?_nc_cat=107&ccb=1-7&_nc_sid=8cd0a2&_nc_ohc=-KZ-jXJf58kAX9Bfh6f&_nc_ht=scontent-cph2-1.xx&oh=03_AdSkmwYwSv7yuHjijLEukgRpSPY6_BAGZPIdYvFtNCE0YQ&oe=654F1437" alt="KinoXP Logo">
 </div>
 
+
 <script>
     // Add an event listener to the "Employee Catalog" button
     const employeeCatalogButton = document.getElementById("employeeCatalogButton");
@@ -97,28 +99,37 @@
     // Add an event listener to the "Movie bookings" button
     const movieBookingButton = document.getElementById("movieBookingButton");
     movieBookingButton.addEventListener("click", function () {
+
         window.location.href = 'calendar';
     });
 
     // Add an event listener to the "Accessing Booking Details" button
     const accessingBookingDetailsButton = document.getElementById("accessingBookingDetailsButton");
     accessingBookingDetailsButton.addEventListener("click", function () {
+
         window.location.href = 'BookingInformationLookup';
     });
 
-    function loadMenuBar() {
-        const menuBarContainer = document.querySelector(".menu-bar-container");
-        const xhr = new XMLHttpRequest();
-        xhr.open("GET", "menuBar", true);
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                menuBarContainer.innerHTML = xhr.responseText;
-            }
-        };
-        xhr.send();
-    }
-    // Call the loadMenuBar function to insert the menu bar
-    loadMenuBar();
 </script>
+
+<script>
+    // Function to load the navigation bar using the fetch API
+    function loadNavigationBar() {
+        console.log('Fetching navigation bar...');
+        fetch('navbar')
+            .then(response => response.text())
+            .then(data => {
+                console.log('Fetched navigation bar successfully.');
+                document.querySelector('.menu-bar-container').innerHTML = data;
+            })
+            .catch(error => {
+                console.error('Error loading navigation bar:', error);
+            });
+    }
+
+    // Call the loadNavigationBar function to insert the navigation bar
+    loadNavigationBar();
+</script>
+
 </body>
 </html>

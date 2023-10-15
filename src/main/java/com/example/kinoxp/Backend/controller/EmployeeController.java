@@ -1,10 +1,18 @@
 package com.example.kinoxp.Backend.controller;
 
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+
+import javax.servlet.http.HttpSession;
+
+@ComponentScan(basePackages = "com.example.kinoxp.Backend.controller")
+
 @Controller
+@CrossOrigin
 @RequestMapping("/employees")
 public class EmployeeController {
 
@@ -20,7 +28,7 @@ public class EmployeeController {
     }
 
 
-    @GetMapping("/employeeInfo{employeeId}")
+    @GetMapping("/employeeInfo/{employeeId}")
     public String employeeinfoDisplay(){
         return "employeeInfo";
     }
@@ -28,11 +36,6 @@ public class EmployeeController {
     @GetMapping("/employeeList")
     public String employeeListDisplay(){
         return "employeeList";
-    }
-
-    @GetMapping("/menuBar")
-    public String getMenuBar() {
-        return "menuBar";
     }
 
 
@@ -46,10 +49,29 @@ public class EmployeeController {
         return "createEmployee";
     }
 
-    @GetMapping()
-    public String editEmployee(){
-        return "editEmpployee";
+    @GetMapping("/editEmployee")
+    public String editEmployee() {
+        return "editEmployee";
     }
+
+    @GetMapping("/navbar")
+    public String navbar(){
+        return "navbar";
+    }
+
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        // Invalidate the session
+        session.invalidate();
+        // Redirect to the login page or another appropriate page
+        return "redirect:/login";
+    }
+
+
+
+
+
 
 
 

@@ -94,6 +94,10 @@
 
 </head>
 <body>
+
+<!-- Container for the menu bar -->
+<div class="menu-bar-container"></div>
+
 <h1>Employee List</h1>
 <div class="button-container">
 <table>
@@ -105,9 +109,7 @@
         <button class="icon-button" id="create-button" onclick="redirectToCreatePage()">
             <i class="fas fa-plus"></i> Create
         </button>
-        <button class="icon-button" id="edit-button" onclick="redirectToEditPage()">
-            <i class="fas fa-pencil-alt"></i> Edit
-        </button>
+
         <button class="icon-button" id="delete-button" onclick="redirectToDeletePage()">
             <i class="fas fa-trash"></i> Delete
         </button>
@@ -195,6 +197,23 @@
         window.location.href = 'deleteEmployee';
 
     }
+
+    // Function to load the navigation bar using the fetch API
+    function loadNavigationBar() {
+        console.log('Fetching navigation bar...');
+        fetch('navbar')
+            .then(response => response.text())
+            .then(data => {
+                console.log('Fetched navigation bar successfully.');
+                document.querySelector('.menu-bar-container').innerHTML = data;
+            })
+            .catch(error => {
+                console.error('Error loading navigation bar:', error);
+            });
+    }
+
+    // Call the loadNavigationBar function to insert the navigation bar
+    loadNavigationBar();
 
 </script>
 

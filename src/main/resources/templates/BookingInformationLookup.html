@@ -90,6 +90,9 @@
     </style>
 </head>
 <body>
+<!-- Container for the menu bar -->
+<div class="menu-bar-container"></div>
+
 <h1>Booking Information Lookup</h1>
 <div class="search-container">
     <input type="text" id="phone-input" class="search-input" placeholder="Enter phone number">
@@ -110,6 +113,28 @@
 </div>
 
 <script src="/js/booking.js"></script>
+
+<script>
+
+    // Function to load the navigation bar using the fetch API
+    function loadNavigationBar() {
+        console.log('Fetching navigation bar...');
+        fetch('navbar')
+            .then(response => response.text())
+            .then(data => {
+                console.log('Fetched navigation bar successfully.');
+                document.querySelector('.menu-bar-container').innerHTML = data;
+            })
+            .catch(error => {
+                console.error('Error loading navigation bar:', error);
+            });
+    }
+
+    // Call the loadNavigationBar function to insert the navigation bar
+    loadNavigationBar();
+
+
+</script>
 </body>
 </html>
 

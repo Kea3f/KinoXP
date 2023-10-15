@@ -77,6 +77,7 @@
     </style>
 </head>
 <body>
+
 <!-- Container for the menu bar -->
 <div class="menu-bar-container"></div>
 
@@ -147,19 +148,23 @@
     });
 
 
-    function loadMenuBar() {
-        const menuBarContainer = document.querySelector(".menu-bar-container");
-        const xhr = new XMLHttpRequest();
-        xhr.open("GET", "menuBar", true);
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                menuBarContainer.innerHTML = xhr.responseText;
-            }
-        };
-        xhr.send();
+    // Function to load the navigation bar using the fetch API
+    function loadNavigationBar() {
+        console.log('Fetching navigation bar...');
+        fetch('navbar')
+            .then(response => response.text())
+            .then(data => {
+                console.log('Fetched navigation bar successfully.');
+                document.querySelector('.menu-bar-container').innerHTML = data;
+            })
+            .catch(error => {
+                console.error('Error loading navigation bar:', error);
+            });
     }
-    // Call the loadMenuBar function to insert the menu bar
-    loadMenuBar();
+
+    // Call the loadNavigationBar function to insert the navigation bar
+    loadNavigationBar();
+
 
 </script>
 
